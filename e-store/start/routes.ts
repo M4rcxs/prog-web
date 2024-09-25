@@ -17,11 +17,7 @@ router.get('/', async ({ response }) => {
 
   router
   .group(() => {
-    router.get('/', [ProductsController, 'index']).as('lista');
-    router.get('/:id', [ProductsController, 'show']).where('id', router.matchers.number()).as('show');
-    router.post('/', [ProductsController, 'store']).as('create');
-    router.put('/:id', [ProductsController, 'update']).where('id', router.matchers.number()).as('update');
-    router.delete('/:id', [ProductsController, 'destroy']).where('id', router.matchers.number()).as('destroy');
+    router.get('/', [ProductsController, 'index']).as('products.index');
   })
   .prefix('products')
   .as('products');

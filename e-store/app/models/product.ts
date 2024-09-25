@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Product extends BaseModel {
@@ -15,8 +14,8 @@ export default class Product extends BaseModel {
   declare price: number
   
   @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
+  declare createdAt: Date
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  declare updatedAt: Date | null
 }
