@@ -5,14 +5,10 @@ import { HttpContext } from '@adonisjs/core/http'
 export default class ProductsController {
 
   // Método para listar os produtos
-  public async index({ response }: HttpContext) {
+  public async index({ view, response }: HttpContext) {
     const products = await Product.all()
 
-    if (products.length === 0) {
-      return response.status(200).json({ message: 'Não há nenhum produto disponível.' })
-    }
-
-    return response.status(200).json(products)
+    return view.render('products/products', { products })
   }
 
   // Método para criar um novo produto
