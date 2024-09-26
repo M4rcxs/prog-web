@@ -21,23 +21,24 @@ export default class ProductsController {
   
     return view.render('products/product', { product })
   }
-  
-  // Método para criar um novo produto
-  public async create({ request, response }: HttpContext) {
-    const data = request.only(['name', 'description', 'price'])
 
+  public async store({ request, response }: HttpContext) {
+    const data = request.only(['name', 'description', 'price'])
+    console.log('Dados do produto:', data)  // Log para verificar os dados do produto
     try {
-      // Cria o produto no banco de dados
       const product = await Product.create(data)
 
-      // Retorna o produto criado
       return response.status(201).json(product)
     } catch (error) {
-      // Em caso de erro, retorna uma resposta de erro
       return response.status(500).json({
         message: 'Erro ao criar produto',
         error: error.message,
       })
     }
+  }
+  
+  // Método para criar um novo produto
+  public async create({ view }: HttpContext) {
+    return view.render('product/create')
   }
 }
