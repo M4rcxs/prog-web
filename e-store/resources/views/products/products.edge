@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Webcrumbs</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body class="bg-gray-100">
+    <div id="webcrumbs" class="flex justify-center py-10">
+        <div class="w-[1200px] bg-neutral-900 p-10 rounded-lg">
+            <h2 class="text-white font-title text-3xl text-center mb-10">Introducing Our Latest Product</h2>
+            <div class="flex justify-between gap-6">
+                @each(product in products)
+                <div class="bg-neutral-50 rounded-lg shadow-md p-4 w-[350px]">
+                    <img
+                        src="{{ product.image_url }}"
+                        alt="Product"
+                        class="w-full h-[180px] object-cover rounded-md"
+                    />
+                    <div class="relative -mt-8 text-center">
+                        <button class="rounded-full bg-white text-black font-semibold text-sm px-4 py-2 shadow-md">
+                            View Product
+                        </button>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+                        <p class="text-sm text-neutral-600 mt-2">
+                            {{ product.description }}
+                        </p>
+                    </div>
+                    <div class="flex justify-between items-center mt-6">
+                        <span class="text-lg font-semibold">${{ product.price }}</span>
+                        <button class="rounded-md bg-neutral-900 py-2 px-4 text-white text-sm">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                @endeach
+            </div>
+        </div>
+    </div>
+</body>
+</html>
