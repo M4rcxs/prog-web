@@ -41,4 +41,21 @@ export default class ProductsController {
   public async create({ view }: HttpContext) {
     return view.render('product/create')
   }
+
+  public async destroy({ params, response }: HttpContext) {
+    try {
+      const product = await Product.findOrFail(params.id)
+      await product.delete()
+      return response.status(200).json({
+        message: 'Produto deletado com sucesso',
+      })
+    } catch (error) {
+      return response.status(500).json({
+        message: 'Erro ao deletar produto',
+        error: error.message,
+      })
+    }
+  }
+
+
 }

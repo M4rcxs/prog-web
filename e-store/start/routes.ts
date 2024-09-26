@@ -9,6 +9,7 @@ router.group(() => {
   router.post('/store', [ProductsController, 'store']).as('store').middleware([]);
   router.get('/create', [ProductsController, 'create']).as('create')
   router.get('/:id', [ProductsController, 'show']).as('show')
+  router.delete('/:id', [ProductsController, 'destroy']).as('destroy')
 })
 .prefix('products')
 .as('products')
