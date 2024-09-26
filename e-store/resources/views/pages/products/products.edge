@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Produtos</title>
+    <title>Sua Aplicação com Tailwind CSS</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <h1>Lista de Produtos</h1>
-    <ul>
+    <h1 class="text-2xl font-bold text-center">Produtos</h1>
+    <div class="container mx-auto">
         @each(product in products)
-            <li>
-                <strong>{{ product.name }}</strong> - R$ {{ product.price }}<br>
-                {{ product.description }}
-            </li>
+            <div class="bg-white shadow-md rounded p-4 m-4 w-[300px]">
+                <h2 class="text-lg font-bold">{{ product.name }}</h2>
+                <p class="text-sm text-gray-600">{{ product.description }}</p>
+                <p class="text-sm text-gray-600">R$ {{ product.price }}</p>
+            </div>
+        </div>
         @endeach
-    </ul>
+    <!-- Conteúdo aqui -->
 </body>
 </html>
