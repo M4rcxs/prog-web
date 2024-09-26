@@ -47,7 +47,7 @@
                 <hr class="my-4" />
 
                 <!-- Price -->
-                <div class="text-3xl font-bold text-red-600 mb-1">R$ 135,00</div>
+                <div class="text-3xl font-bold text-red-600 mb-1">R$ {{product.price}}</div>
 
                 <!-- Quantity and Button -->
                 <div class="flex items-center gap-4 mt-6">
@@ -70,19 +70,19 @@
                         <span>
                             <i class="fa-solid fa-truck"></i> Pagar na Entrega
                         </span>
-                        <span>R$ 135,00</span>
+                        <span>R$ {{product.price}}</span>
                     </div>
                     <div class="flex justify-between items-center mt-2">
                         <span>
                             <i class="fa-brands fa-paypal"></i> PagSeguro
                         </span>
-                        <span>R$ 128,25</span> <!-- 5% de desconto -->
+                        <span>R$ {{product.price-(product.price*0.05)}}</span> <!-- 5% de desconto -->
                     </div>
                     <div class="flex justify-between items-center mt-2">
                         <span>
                             <i class="fa-solid fa-money-bill"></i> Boleto Bancário
                         </span>
-                        <span>R$ 121,50</span> <!-- 10% de desconto -->
+                        <span>R$ {{product.price-(product.price*0.1)}}</span> <!-- 10% de desconto -->
                     </div>
                 </div>
 
