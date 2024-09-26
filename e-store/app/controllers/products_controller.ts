@@ -1,11 +1,11 @@
 //arquivo poducts_controller.ts
 
 import Product from '#models/product'
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext' 
+import { HttpContext } from '@adonisjs/core/http'
 export default class ProductsController {
 
   // Método para listar os produtos
-  public async index({ response }: HttpContextContract) {
+  public async index({ response }: HttpContext) {
     const products = await Product.all()
 
     if (products.length === 0) {
@@ -16,7 +16,7 @@ export default class ProductsController {
   }
 
   // Método para criar um novo produto
-  public async create({ request, response }: HttpContextContract) {
+  public async create({ request, response }: HttpContext) {
     const data = request.only(['name', 'description', 'price'])
 
     try {
