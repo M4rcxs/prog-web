@@ -8,16 +8,16 @@
 </head>
 @!include('home/partials/navbar')
 <body class="bg-gray-100">
-    <div id="webcrumbs" class="flex justify-center py-10">
-        <div class="w-[1200px] p-10 rounded-lg">
-            <h2 class="font-semibold font-title text-3xl text-center mb-10">Featured</h2>
+    <div id="webcrumbs" class="flex justify-center">
+        <div class="w-full p-10 rounded-lg">
+            <h2 class="font-semibold font-title text-3xl text-center mb-10">Destaques</h2>
             <div class="flex justify-between gap-6">
                 @each(product in products)
-                <div class="bg-neutral-50 rounded-lg shadow-md p-4 w-full">
+                <div class="bg-neutral-50 rounded-lg shadow-md p-4 w-full h-full">
                     <img
                         src="{{ product['$extras'].image_url }}"
                         alt="Product"
-                        class="w-full h-[180px] object-cover rounded-md"
+                        class="w-full h-[500px] object-cover rounded-md"
                     />
                     <div class="relative -mt-8 text-center">
                         <a class="rounded-full bg-white text-black font-semibold text-sm px-4 py-2 shadow-md"

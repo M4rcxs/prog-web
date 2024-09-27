@@ -13,7 +13,6 @@ export default class ProductsController {
   }
 
   public async show({ params, view }: HttpContext) {
-    console.log('ID do produto:', params.id)  // Log para verificar o valor do ID
     const product = await Product.find(params.id)
   
     if (!product) {
