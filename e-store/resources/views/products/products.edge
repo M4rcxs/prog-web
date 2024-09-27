@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - Webcrumbs</title>
+    <title>MK</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 @!include('home/partials/navbar')
 <body class="bg-gray-100">
     <div id="webcrumbs" class="flex justify-center py-10">
-        <div class="w-[1200px] bg-neutral-900 p-10 rounded-lg">
-            <h2 class="text-white font-title text-3xl text-center mb-10">Introducing Our Latest Product</h2>
+        <div class="w-[1200px] p-10 rounded-lg">
+            <h2 class="font-semibold font-title text-3xl text-center mb-10">Featured</h2>
             <div class="flex justify-between gap-6">
                 @each(product in products)
                 <div class="bg-neutral-50 rounded-lg shadow-md p-4 w-[350px]">
                     <img
-                        src="{{ product.image_url }}"
+                        src="https://images.tcdn.com.br/img/img_prod/476013/bone_college_prison_marrom_6771_1_77d737821da9cf6b9f111499997879b4.jpg"
                         alt="Product"
                         class="w-full h-[180px] object-cover rounded-md"
                     />
