@@ -2,6 +2,7 @@
 
 import Product from '#models/product'
 import { HttpContext } from '@adonisjs/core/http'
+import ProductService from '#services/ProductService'
 export default class ProductsController {
 
   // Método para listar os produtos
@@ -21,6 +22,23 @@ export default class ProductsController {
   
     return view.render('products/product', { product })
   }
+  
+  public async calculateShipping({ request, response }: HttpContext) {
+    const cep = request.input('cep') // Recebe o CEP enviado pelo frontend
+    console.log('CEP:', cep)  // Log para verificar o valor do CEP
+    try {
+      const endereco = await ProductService.getCep(cep) // Chama o serviço para buscar o CEP
+      return response.json({
+        success: true,
+        endereco,
+      })
+    } catch (error) {
+      return response.status(500).json({
+        success: false,
+        message: 'Erro ao buscar o endereço.',
+      })
+    }
+  }
 
   public async store({ request, response }: HttpContext) {
     const data = request.only(['name', 'description', 'price'])
@@ -36,6 +54,7 @@ export default class ProductsController {
       })
     }
   }
+
   
   // Método para criar um novo produto
   public async create({ view }: HttpContext) {

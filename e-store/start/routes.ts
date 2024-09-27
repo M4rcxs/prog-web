@@ -3,10 +3,11 @@
 import router from '@adonisjs/core/services/router'
 
 import ProductsController from '#controllers/products_controller'
+import HomeController from '#controllers/home_controller'
 
 router.group(() => {
-  router.get('/', [ProductsController, 'index']).as('products')
-  router.post('/store', [ProductsController, 'store']).as('store').middleware([]);
+  router.get('/', [ProductsController, 'index']).as('index')
+  router.post('/store', [ProductsController, 'store']).as('store')
   router.get('/create', [ProductsController, 'create']).as('create')
   router.get('/:id', [ProductsController, 'show']).as('show')
   router.delete('/:id', [ProductsController, 'destroy']).as('destroy')
@@ -14,9 +15,9 @@ router.group(() => {
 })
 .prefix('products')
 .as('products')
+router.post('/calculate-shipping', [ProductsController, 'calculateShipping']).as('calculateShipping')
 
-router.get('/', async ({ response }) => {
-  return response.send('API de Produtos. Acesse /products para ver os produtos.')
-})
+router.get('/', [HomeController, 'index']).as('index')
+
 
 
