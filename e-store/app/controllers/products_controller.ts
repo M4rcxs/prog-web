@@ -19,7 +19,7 @@ export default class ProductsController {
       console.log('Produto não encontrado')  // Log se o produto não for encontrado
     }
   
-    return view.render('products/product', { product })
+    return view.render('products/show', { product })
   }
   
   public async calculateShipping({ request, response }: HttpContext) {
