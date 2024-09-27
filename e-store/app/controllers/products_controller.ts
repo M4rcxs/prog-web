@@ -57,5 +57,16 @@ export default class ProductsController {
     }
   }
 
+  async patch({ params, request}: HttpContext) {
+    const product = await Product.findOrFail(params.id)
+
+    const payload = await request.only(['name', 'price', 'description'])
+    product.merge(payload)
+
+    await product.save()
+
+    return product
+  }
+
 
 }
