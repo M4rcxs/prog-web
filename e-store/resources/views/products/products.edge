@@ -19,9 +19,10 @@
                         class="w-full h-[180px] object-cover rounded-md"
                     />
                     <div class="relative -mt-8 text-center">
-                        <button class="rounded-full bg-white text-black font-semibold text-sm px-4 py-2 shadow-md">
+                        <a class="rounded-full bg-white text-black font-semibold text-sm px-4 py-2 shadow-md"
+                            href="{{ route('products.show', { id: product.id }) }}">
                             View Product
-                        </button>
+                        </a>
                     </div>
                     <div class="mt-6 text-center">
                         <h3 class="text-lg font-semibold">{{ product.name }}</h3>
