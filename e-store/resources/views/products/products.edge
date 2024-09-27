@@ -1,46 +1,40 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MK</title>
+    <title>MK - Streetwear</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
 </head>
-@!include('home/partials/navbar')
-<body class="bg-gray-100">
-    <div id="webcrumbs" class="flex justify-center">
-        <div class="w-full p-10 rounded-lg">
-            <h2 class="font-semibold font-title text-3xl text-center mb-10">Destaques</h2>
-            <div class="flex justify-between gap-6">
-                @each(product in products)
-                <div class="bg-neutral-50 rounded-lg shadow-md p-4 w-full h-full">
-                    <img
-                        src="{{ product['$extras'].image_url }}"
-                        alt="Product"
-                        class="w-full h-[500px] object-cover rounded-md"
-                    />
-                    <div class="relative -mt-8 text-center">
-                        <a class="rounded-full bg-white text-black font-semibold text-sm px-4 py-2 shadow-md"
-                            href="{{ route('products.show', { id: product.id }) }}">
-                            View Product
-                        </a>
-                    </div>
-                    <div class="mt-6 text-center">
-                        <h3 class="text-lg font-semibold">{{ product.name }}</h3>
-                        <p class="text-sm text-neutral-600 mt-2">
-                            {{ product.description }}
-                        </p>
-                    </div>
-                    <div class="flex justify-between items-center mt-6">
-                        <span class="text-lg font-semibold">${{ product.price }}</span>
-                        <button class="rounded-md bg-neutral-900 py-2 px-4 text-white text-sm">
-                            Add to Cart
-                        </button>
-                    </div>
+
+<div id="webcrumbs" class="flex justify-center">
+    <div class="w-full p-10 rounded-lg">
+        <h2 class="font-semibold font-title text-3xl text-center mb-10">Destaques</h2>
+        <div class="flex justify-between gap-6">
+            @each(product in products)
+            <div class="bg-neutral-50 rounded-lg shadow-md p-4 w-full h-full">
+                <img src="{{ product.imageUrl }}" alt="Product"
+                    class="w-full h-[500px] object-cover rounded-md" />
+                <div class="relative -mt-8 text-center">
+                    <a class="rounded-full bg-white text-black font-semibold text-sm px-4 py-2 shadow-md"
+                        href="{{ route('products.show', { id: product.id }) }}">
+                        View Product
+                    </a>
                 </div>
-                @endeach
+                <div class="mt-6 text-center">
+                    <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+                    <p class="text-sm text-neutral-600 mt-2">
+                        {{ product.description }}
+                    </p>
+                </div>
+                <div class="flex justify-between items-center mt-6">
+                    <span class="text-lg font-semibold">${{ product.price }}</span>
+                    <button class="rounded-md bg-neutral-900 py-2 px-4 text-white text-sm">
+                        Add to Cart
+                    </button>
+                </div>
             </div>
+            @endeach
         </div>
     </div>
-</body>
-</html>
+</div>

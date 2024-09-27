@@ -15,6 +15,7 @@ router.group(() => {
 })
 .prefix('products')
 .as('products')
+
 router.post('/calculate-shipping', [ProductsController, 'calculateShipping']).as('calculateShipping')
 
 router.get('/', [HomeController, 'index']).as('index')
