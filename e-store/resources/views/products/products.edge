@@ -13,9 +13,9 @@
             <h2 class="font-semibold font-title text-3xl text-center mb-10">Featured</h2>
             <div class="flex justify-between gap-6">
                 @each(product in products)
-                <div class="bg-neutral-50 rounded-lg shadow-md p-4 w-[350px]">
+                <div class="bg-neutral-50 rounded-lg shadow-md p-4 w-full">
                     <img
-                        src="https://images.tcdn.com.br/img/img_prod/476013/bone_college_prison_marrom_6771_1_77d737821da9cf6b9f111499997879b4.jpg"
+                        src="{{ product['$extras'].image_url }}"
                         alt="Product"
                         class="w-full h-[180px] object-cover rounded-md"
                     />

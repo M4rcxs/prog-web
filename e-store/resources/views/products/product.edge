@@ -15,8 +15,8 @@
     <div id="webcrumbs" class="flex justify-center py-10">
         <div class="w-[1000px] p-6 bg-neutral-50 shadow-lg rounded-lg flex gap-8">
             <!-- Left - Product Image -->
-            <div class="w-[400px]">
-                <img src="https://images.tcdn.com.br/img/img_prod/476013/bone_college_prison_marrom_6771_1_77d737821da9cf6b9f111499997879b4.jpg" alt="Bone Alpinestar"
+            <div class="w-full">
+                <img src="{{ product['$extras'].image_url }}" alt="Bone Alpinestar"
                     class="object-cover rounded-lg w-[400px] h-[400px]" />
                 <div class="mt-4 flex gap-4">
                     <button class="p-2 bg-neutral-200 rounded-md">
@@ -97,7 +97,8 @@
                     <div class="flex gap-4">
                         <input id="cep" type="text" placeholder="CEP"
                             class="w-[200px] h-[40px] p-2 border border-neutral-300 rounded-md" />
-                        <button id="calcular-frete" class="h-[40px] w-[60px] bg-neutral-200 text-neutral-700 rounded-md">
+                        <button id="calcular-frete"
+                            class="h-[40px] w-[60px] bg-neutral-200 text-neutral-700 rounded-md">
                             OK
                         </button>
                     </div>
@@ -143,4 +144,3 @@
             }
         });
     </script>
-

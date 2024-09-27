@@ -41,7 +41,7 @@ export default class ProductsController {
   }
 
   public async store({ request, response }: HttpContext) {
-    const data = request.only(['name', 'description', 'price'])
+    const data = request.only(['name', 'description', 'price', 'imageUrl'])	
     console.log('Dados do produto:', data)  // Log para verificar os dados do produto
     try {
       const product = await Product.create(data)

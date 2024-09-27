@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('name').notNullable() // Campo 'name' do tipo string
       table.text('description').nullable() // Campo 'description' do tipo texto
       table.decimal('price', 12, 2).notNullable() 
+      table.text('image_url').notNullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

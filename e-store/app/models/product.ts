@@ -11,6 +11,9 @@ export default class Product extends BaseModel {
   @column()
   declare description: string
 
+  @column({ columnName: 'image_url' })
+  declare imageUrl: string
+
   @column()
   declare price: number
   
