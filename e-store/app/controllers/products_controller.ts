@@ -8,7 +8,6 @@ export default class ProductsController {
   // Método para listar os produtos
   public async index({ view }: HttpContext) {
     const products = await Product.all()
-    console.log(products)
     return view.render('products/products', { products })
   }
 
@@ -18,7 +17,7 @@ export default class ProductsController {
     if (!product) {
       console.log('Produto não encontrado')  // Log se o produto não for encontrado
     }
-  
+    console.log("qaaaaaaaa")
     return view.render('products/show', { product })
   }
   
