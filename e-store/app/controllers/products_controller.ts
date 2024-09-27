@@ -1,11 +1,9 @@
-//arquivo poducts_controller.ts
-
 import Product from '#models/product'
 import { HttpContext } from '@adonisjs/core/http'
 import ProductService from '#services/ProductService'
+
 export default class ProductsController {
 
-  // Método para listar os produtos
   public async index({ view }: HttpContext) {
     const products = await Product.all()
     return view.render('products/products', { products })
@@ -13,19 +11,17 @@ export default class ProductsController {
 
   public async show({ params, view }: HttpContext) {
     const product = await Product.find(params.id)
-  
+    
     if (!product) {
-      console.log('Produto não encontrado')  // Log se o produto não for encontrado
+      console.log('Produto não encontrado') 
     }
-    console.log("qaaaaaaaa")
     return view.render('products/show', { product })
   }
   
   public async calculateShipping({ request, response }: HttpContext) {
-    const cep = request.input('cep') // Recebe o CEP enviado pelo frontend
-    console.log('CEP:', cep)  // Log para verificar o valor do CEP
+    const cep = request.input('cep') 
     try {
-      const endereco = await ProductService.getCep(cep) // Chama o serviço para buscar o CEP
+      const endereco = await ProductService.getCep(cep)
       return response.json({
         success: true,
         endereco,
@@ -40,7 +36,6 @@ export default class ProductsController {
 
   public async store({ request, response }: HttpContext) {
     const data = request.only(['name', 'description', 'price', 'imageUrl'])	
-    console.log('Dados do produto:', data)  // Log para verificar os dados do produto
     try {
       const product = await Product.create(data)
 
@@ -54,7 +49,6 @@ export default class ProductsController {
   }
 
   
-  // Método para criar um novo produto
   public async create({ view }: HttpContext) {
     return view.render('product/create')
   }

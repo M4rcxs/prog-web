@@ -1,12 +1,18 @@
 @include('layouts/main')
-    <div class="flex justify-center">
-        @include('layouts/partials/hero')
-    </div>
+<div class="flex justify-center">
+    @include('layouts/partials/hero')
+</div>
 
-    <div class="flex justify-center">
-            @component('components/product', { products: products })
-            @endcomponent
+<div class="flex justify-center">
+    <div class="flex justify-center items-center">
+        <h1 class="items-center justify-center font-semibold">
+            DESTAQUE
+        </h1>
     </div>
-</body>
+</div>
+<div>
 
-</html>
+    @component('components/product', { products: products })
+    @endcomponent
+</div>
+</div>
