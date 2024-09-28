@@ -47,10 +47,9 @@ export default class ProductsController {
       })
     }
   }
-
   
   public async create({ view }: HttpContext) {
-    return view.render('product/create')
+    return view.render('products/create_product')
   }
 
   public async destroy({ params, response }: HttpContext) {
