@@ -1,30 +1,48 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Produto</title>
-</head>
-<body>
-    <h1>Criar Novo Produto</h1>
-    <form action="/products" method="POST">
-        <div>
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" required>
+@include('layouts/main')
+    <!-- Contêiner centralizado com a imagem de fundo -->
+    <div class="flex justify-center items-center min-h-[100vh] bg-gray">
+        <div id="webcrumbs"> 
+            <div class='w-[600px] min-h-[600px] bg-neutral-50 shadow-md rounded-lg p-6'>
+                <h1 class='font-title text-3xl mb-6'>Cadastrar Produto</h1>
+                
+                <!-- Formulário para cadastrar o produto -->
+                <form action="/products/store" method="POST" class='flex flex-col gap-4'>
+
+                    <div class='flex flex-col'>
+                        <label for='name' class='mb-1 text-lg'>Nome do Produto</label>
+                        <input id='name' name="name" class='p-2 border rounded-md' type='text' placeholder='Digite o nome do produto' required/>
+                    </div>
+
+                    <div class='flex flex-col'>
+                        <label for='description' class='mb-1 text-lg'>Descrição</label>
+                        <textarea id='description' name="description" class='p-2 border rounded-md' rows='4' placeholder='Digite uma descrição do produto' required></textarea>
+                    </div>
+
+                    <div class='flex flex-col'>
+                        <label for='imageUrl' class='mb-1 text-lg'>URL da Imagem</label>
+                        <input id='imageUrl' name="imageUrl" class='p-2 border rounded-md' type='url' placeholder='Digite a URL da imagem do produto' required/>
+                    </div>
+
+                    <div class='flex flex-col'>
+                        <label for='price' class='mb-1 text-lg'>Preço</label>
+                        <input id='price' name="price" class='p-2 border rounded-md' type='number' placeholder='Digite o preço do produto' step="0.01" required/>
+                    </div>
+                    
+                    <div class='flex flex-col'>
+                        <label for='category' class='mb-1 text-lg'>Categoria</label>
+                        <select id='category' name="category" class='p-2 border rounded-md'>
+                            <option value='eletronicos'>Eletrônicos</option>
+                            <option value='roupas'>Roupas</option>
+                            <option value='alimentos'>Alimentos</option>
+                            <option value='livros'>Livros</option>
+                            <option value='outros'>Outros</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class='mt-4 h-[40px] w-full bg-black text-neutral-50 rounded-full'>
+                        Cadastrar Produto
+                    </button>
+                </form>
+            </div> 
         </div>
-        <div>
-            <label for="price">Preço:</label>
-            <input type="text" id="price" name="price" required>
-        </div>
-        <div>
-            <label for="description">Descrição:</label>
-            <textarea id="description" name="description" required></textarea>
-        </div>
-        <div></div>
-            <label for="name">Image Url:</label>
-            <input type="text" id="imagUrl" name="image" required>
-        </div>
-        <button type="submit">Criar Produto</button>
-    </form>
-</body>
-</html>
+    </div>
