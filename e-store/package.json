@@ -54,6 +54,7 @@
   "dependencies": {
     "@adonisjs/auth": "^9.2.3",
     "@adonisjs/core": "^6.14.0",
+    "@adonisjs/hash": "^9.0.5",
     "@adonisjs/lucid": "^21.2.0",
     "@adonisjs/session": "^7.4.2",
     "@adonisjs/shield": "^8.1.1",

@@ -5,6 +5,7 @@ import router from '@adonisjs/core/services/router'
 import ProductsController from '#controllers/products_controller'
 import HomeController from '#controllers/home_controller'
 import CategoriesController from '#controllers/categories_controller'
+import AuthController from '#controllers/auth_controller'
 
 router.group(() => {
   router.get('/', [ProductsController, 'index']).as('index')
@@ -31,6 +32,13 @@ router.group(() => {
 router.post('/calculate-shipping', [ProductsController, 'calculateShipping']).as('calculateShipping')
 
 router.get('/', [HomeController, 'index']).as('index')
+
+router.group(() => { 
+  router.post('/register', [AuthController, 'register']).as('register')
+  router.post('/login', [AuthController, 'login']).as('login')
+  // router.post('/logout', [AuthController, 'logout']).as('logout')
+}
+).prefix('auth').as('auth')
 
 
 
