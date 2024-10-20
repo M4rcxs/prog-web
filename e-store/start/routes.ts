@@ -1,11 +1,14 @@
 //arquivo routes.ts
 
 import router from '@adonisjs/core/services/router'
-
 import ProductsController from '#controllers/products_controller'
 import HomeController from '#controllers/home_controller'
 import CategoriesController from '#controllers/categories_controller'
 import AuthController from '#controllers/auth_controller'
+
+// router
+//  .get('dashboard', () => {})
+//  .use(middleware.auth())
 
 router.group(() => {
   router.get('/', [ProductsController, 'index']).as('index')
@@ -34,11 +37,14 @@ router.post('/calculate-shipping', [ProductsController, 'calculateShipping']).as
 router.get('/', [HomeController, 'index']).as('index')
 
 router.group(() => { 
-  router.post('/register', [AuthController, 'register']).as('register')
-  router.post('/login', [AuthController, 'login']).as('login')
-  // router.post('/logout', [AuthController, 'logout']).as('logout')
+  router.post('/register', [AuthController, 'register']).as('register'),
+  router.post('/store', [AuthController, 'store']).as('login'),
+  router.get('/create', [AuthController, 'create']).as('create')
+  router.get('/:id', [AuthController, 'show']).as('show')
+  router.delete('/:id', [AuthController, 'destroy']).as('destroy')
+  router.patch('/:id', [AuthController, 'patch']).as('patch')
+  router.post('/logout', [AuthController, 'logout']).as('logout')
 }
 ).prefix('auth').as('auth')
-
 
 

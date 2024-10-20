@@ -11,8 +11,8 @@ export default class extends BaseSchema {
       table.string('password').notNullable();
       table.string('remember_me_token');
       table.string('phone').nullable();
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      table.timestamp('created_at').notNullable()
+      table.timestamp('updated_at').nullable()
     })
   }
 
