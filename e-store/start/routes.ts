@@ -4,6 +4,7 @@ import router from '@adonisjs/core/services/router'
 import ProductsController from '#controllers/products_controller'
 import HomeController from '#controllers/home_controller'
 import CategoriesController from '#controllers/categories_controller'
+import AuthController from '#controllers/auth_controller'
 
 // router
 //  .get('dashboard', () => {})
