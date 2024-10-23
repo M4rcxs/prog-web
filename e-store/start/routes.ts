@@ -36,15 +36,15 @@ router.post('/calculate-shipping', [ProductsController, 'calculateShipping']).as
 
 router.get('/', [HomeController, 'index']).as('index')
 
-router.group(() => { 
-  router.post('/register', [AuthController, 'register']).as('register'),
-  router.post('/store', [AuthController, 'store']).as('login'),
-  router.get('/create', [AuthController, 'create']).as('create')
+router.group(() => {
+  router.get('/login', [AuthController, 'loginView']).as('loginView')  // Rota para abrir a página de login
+  router.post('/register', [AuthController, 'register']).as('register')
+  router.post('/store', [AuthController, 'store']).as('login')  // Rota para realizar o login
+  router.get('/create', [AuthController, 'create']).as('create_user')
   router.get('/:id', [AuthController, 'show']).as('show')
   router.delete('/:id', [AuthController, 'destroy']).as('destroy')
   router.patch('/:id', [AuthController, 'patch']).as('patch')
   router.post('/logout', [AuthController, 'logout']).as('logout')
-}
-).prefix('auth').as('auth')
+}).prefix('auth').as('auth')
 
 
