@@ -1,0 +1,106 @@
+@include('layouts/main')
+
+<div class="flex justify-center h-screen items-center bg-gray-100">
+    <div class="w-full max-w-lg bg-white shadow-md rounded px-12 py-10 mb-6">
+        <h1 class="text-center text-3xl font-semibold text-black mb-8">
+            Criar Usuário
+        </h1>
+        <form action="/auth/register" method="POST">
+            <!-- Nome Completo -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="full_name">
+                    Nome Completo
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                    id="full_name" 
+                    type="text" 
+                    placeholder="Seu nome completo" 
+                    name="full_name" 
+                    required>
+            </div>
+            <!-- E-mail -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                    Seu e-mail
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                    id="email" 
+                    type="email" 
+                    placeholder="contato@progweb.com" 
+                    name="email" 
+                    required>
+            </div>
+            <div class="mb-6">
+							<label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+									Sua senha
+							</label>
+							<div class="relative">
+									<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+											id="password" 
+											type="password" 
+											placeholder="********" 
+											name="password" 
+											required>
+									<!-- Botão para alternar a visualização da senha -->
+									<button type="button" onclick="togglePassword('password', this)" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
+											👁️
+									</button>
+							</div>
+					</div>
+					
+					<!-- Campo de Confirmação da Senha -->
+					<div class="mb-6">
+							<label class="block text-gray-700 text-sm font-bold mb-2" for="confirm_password">
+									Confirme sua senha
+							</label>
+							<div class="relative">
+									<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+											id="confirm_password" 
+											type="password" 
+											placeholder="********" 
+											name="confirm_password" 
+											required>
+									<!-- Botão para alternar a visualização da confirmação de senha -->
+									<button type="button" onclick="togglePassword('confirm_password', this)" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
+											👁️
+									</button>
+							</div>
+					</div>
+					
+					<script>
+					function togglePassword(id, el) {
+							const passwordField = document.getElementById(id);
+							const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+							passwordField.setAttribute('type', type);
+					
+							// Altera o ícone para refletir se a senha está visível ou não
+							el.textContent = type === 'password' ? '👁️' : '🙈';
+					}
+					</script>
+					
+            <!-- Telefone -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+                    Telefone
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                    id="phone" 
+                    type="text" 
+                    placeholder="(XX) XXXXX-XXXX" 
+                    name="phone" 
+                    required>
+            </div>
+            <!-- Botão Criar Conta -->
+            <div class="flex items-center justify-between">
+                <button class="bg-black hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                    type="submit">
+                    Criar Conta
+                </button>
+            </div>            
+        </form>
+        <div class="text-center mt-4">
+            <span class="text-sm text-gray-600">Já tem conta?</span>
+            <a href="/auth/login" class="text-sm text-black-600 hover:underline">Fazer Login</a>
+        </div>
+    </div>
+</div>
