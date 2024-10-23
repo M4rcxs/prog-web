@@ -4,6 +4,7 @@
     "rootDir": "./",
     "outDir": "./build",
     "paths": {
+      "@ioc:Adonis/Core/*": ["./node_modules/@adonisjs/core/build/adonis-typings/*"],
       "@ioc:Adonis/*": ["./node_modules/@adonisjs/*"],
       "App/*": ["./app/*"],
       "Config/*": ["./config/*"],
