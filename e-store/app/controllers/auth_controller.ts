@@ -24,14 +24,10 @@ export default class AuthController {
     }
   }
 
-  public async loginView({ view }: HttpContext) {
-    return view.render('auth/login')
-}
-
-
-public async create({ view }: HttpContext) {
-  return view.render('auth/create_user')
-}
+  public async create({ request, response }: HttpContext) {
+    // falta retornar a view de criar usuario
+    return response.ok({ message: 'User registration page' })
+  }
 
   public async show({ params, response }: HttpContext) {
     try {
