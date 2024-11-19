@@ -38,16 +38,33 @@
 			</a>
 		</nav>
 		<div class="flex space-x-4">
-			<i class="material-symbols-outlined">search</i>
-			<a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
-				<i class="material-symbols-outlined">person</i>
-			</a>
-			<a href="#" class="text-neutral-900 hover:text-primary transition-colors">
-				<i class="material-symbols-outlined">shopping_bag</i>
-			</a>
-			<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
-				<i class="material-symbols-outlined">admin_panel_settings</i> <!-- New icon added here -->
-			</a>
+			@if(auth.isAuthenticated)
+          <p>Usuário: {{ auth.user?.email }}</p>
+					<i class="material-symbols-outlined">search</i>
+					<a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
+						<i class="material-symbols-outlined">person</i>
+					</a>
+					<a href="#" class="text-neutral-900 hover:text-primary transition-colors">
+						<i class="material-symbols-outlined">shopping_bag</i>
+					</a>
+					<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
+						<i class="material-symbols-outlined">admin_panel_settings</i> <!-- New icon added here -->
+					</a>
+					{{--  <a href="{{ route('/auth/logout') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
+						<i class="material-symbols-outlined">logout</i> 
+					</a>  --}}
+      @else
+				<i class="material-symbols-outlined">search</i>
+				<a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
+					<i class="material-symbols-outlined">person</i>
+				</a>
+				<a href="#" class="text-neutral-900 hover:text-primary transition-colors">
+					<i class="material-symbols-outlined">shopping_bag</i>
+				</a>
+				<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
+					<i class="material-symbols-outlined">admin_panel_settings</i> <!-- New icon added here -->
+				</a>
+			@endif
 		</div>
 		
 	</div>
