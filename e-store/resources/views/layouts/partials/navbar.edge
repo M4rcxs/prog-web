@@ -1,26 +1,71 @@
-<div id="webcrumbs">
-	<div class="w-full mx-auto flex justify-between items-center p-4">
-		<nav class="flex items-center gap-8">
-			<a class="font-semibold" href="#">MASCULINO</a>
-			<a class="font-semibold" href="#">NOVIDADES</a>
-			<a class="font-semibold text-center" href="#">
-				FEMININO
-			</a>
-			<a class="font-semibold" href="#">ACESSÓRIOS</a>
-			<a class="font-semibold" href="#">SALE</a>
-			<a class="font-semibold" href="#">KIDS</a>
-		</nav>
-		<a href="{{ route('index') }}">
-			<img src="https://cdn.shopify.com/s/files/1/0222/0104/0992/files/Logo_Stussy_-_Origem_o_que_e_e_o_que_significado_de_street_wear.png?v=1594228390" alt="Logo"
-				class="object-cover w-[110px] h-[60px]" />
+<div id="webcrumbs" class="w-full bg-neutral-50 shadow-md">
+	<div class="w-full mx-auto flex items-center justify-between py-2 px-6">
+		<a href="{{ route('/') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+			<span class="text-4xl font-bold tracking-wider">MK</span>
 		</a>
-
-		<div class="flex items-center gap-4">
-			<div
-				class="flex justify-between items-center bg-neutral-100 px-3 py-2 rounded-full border border-neutral-300 w-full">
-				<span class="material-symbols-outlined">search</span>
-				<input type="text" placeholder="Buscar" class="bg-transparent outline-none pl-2" />
-			</div>
+		<nav class="flex space-x-8">
+			<a href="#"
+				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+				LANÇAMENTOS
+			</a>
+			<a href="#"
+				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+				ACESSÓRIOS
+			</a>
+			<a href="#"
+				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+				BONÉS
+			</a>
+			<a href="#"
+				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+				CALÇADOS
+			</a>
+			<a href="#"
+				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+				ROUPAS
+			</a>
+			<a href="#"
+				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+				SKATE
+			</a>
+			<a href="#"
+				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+				MARCAS
+			</a>
+			<a href="#"
+				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+				PROMOÇÕES
+			</a>
+		</nav>
+		<div class="flex space-x-4">
+			@if(auth.isAuthenticated)
+          <p>Usuário: {{ auth.user?.email }}</p>
+					<i class="material-symbols-outlined">search</i>
+					<a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
+						<i class="material-symbols-outlined">person</i>
+					</a>
+					<a href="#" class="text-neutral-900 hover:text-primary transition-colors">
+						<i class="material-symbols-outlined">shopping_bag</i>
+					</a>
+					<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
+						<i class="material-symbols-outlined">admin_panel_settings</i> <!-- New icon added here -->
+					</a>
+					{{--  <a href="{{ route('/auth/logout') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
+						<i class="material-symbols-outlined">logout</i> 
+					</a>  --}}
+      @else
+				<i class="material-symbols-outlined">search</i>
+				<a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
+					<i class="material-symbols-outlined">person</i>
+				</a>
+				<a href="#" class="text-neutral-900 hover:text-primary transition-colors">
+					<i class="material-symbols-outlined">shopping_bag</i>
+				</a>
+				<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
+					<i class="material-symbols-outlined">admin_panel_settings</i> <!-- New icon added here -->
+				</a>
+			@endif
 		</div>
+		
 	</div>
 </div>

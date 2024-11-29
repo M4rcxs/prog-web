@@ -1,33 +1,41 @@
-import { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
+import type { HttpContext } from '@adonisjs/core/http'
+import { createAuthValidator } from '#validators/auth'
+import { middleware } from '#start/kernel'
+import session from '#config/session'
 
 export default class AuthController {
   public async register({ request, response }: HttpContext) {
     const data = request.only(['full_name', 'email', 'password', 'phone'])
+    await User.create(data)
 
-    try {
-      const user = await User.create(data)
-      return user
-    } catch (error) {
-      return response.badRequest('Unable to register user')
+    return response.redirect().toRoute('auth.login')
+  }
+
+  async store({ auth, request, response }: HttpContext) {
+    const { email, password } = await request.validateUsing(createAuthValidator)
+
+    const user = await User.findBy('email', email)
+
+    if (!user) {
+      return response.abort('E-mail inválido')
     }
+
+    await User.verifyCredentials(email, password)
+
+    await auth.use('web').login(user)
+
+    return response.redirect().toRoute('/home')
+
   }
 
-  public async store({ request, response }: HttpContext) {
-    const { email, password } = request.only(['email', 'password'])
-  
-    try {
-      const user = await User.verifyCredentials(email, password)
-      return response.ok({ message: 'Login successful', user })
-    } catch (error) {
-      return response.unauthorized('Invalid email or password')
-    }
-  }
+  public async loginView({ view }: HttpContext) {
+    return view.render('auth/login')
+}
 
-  public async create({ request, response }: HttpContext) {
-    // falta retornar a view de criar usuario
-    return response.ok({ message: 'User registration page' })
-  }
+public async create({ view }: HttpContext) {
+  return view.render('auth/create_user')
+}
 
   public async show({ params, response }: HttpContext) {
     try {
@@ -62,9 +70,7 @@ export default class AuthController {
 
   public async logout({ auth, response }: HttpContext) {
     try {
-      
-      await auth.use('web') 
-
+      await auth.use('web').logout()
       return response.ok({ message: 'User logged out successfully' })
     } catch (error) {
       return response.internalServerError('Error logging out user')
