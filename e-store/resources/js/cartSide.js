@@ -1,16 +1,8 @@
-console.log('Hello World')
-
 document.addEventListener('DOMContentLoaded', () => {
   const cart = document.getElementById('cart');
-  const toggleCart = document.getElementById('toggle-cart');
   const closeCart = document.getElementById('close-cart');
   const cartItemsContainer = document.getElementById('cart-items');
   const checkoutButton = document.getElementById('checkout-button');
-
-  // Abrir o carrinho
-  toggleCart.addEventListener('click', () => {
-    cart.classList.add('open');
-  });
 
   // Fechar o carrinho
   closeCart.addEventListener('click', () => {
@@ -22,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const response = await fetch('/cart', {
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
       });
 
@@ -47,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    items.forEach(item => {
+    items.forEach((item) => {
       const product = item.product;
       const cartItem = document.createElement('div');
       cartItem.classList.add('flex', 'items-center', 'justify-between');
@@ -70,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Adicionar evento de remover item
-    document.querySelectorAll('.remove-item').forEach(button => {
+    document.querySelectorAll('.remove-item').forEach((button) => {
       button.addEventListener('click', async (e) => {
         const itemId = e.target.getAttribute('data-id');
         await removeItemFromCart(itemId);
@@ -85,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`/cart/${itemId}`, {
         method: 'DELETE',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
       });
 
@@ -103,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('/cart/checkout', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
       });
 
@@ -123,4 +115,3 @@ document.addEventListener('DOMContentLoaded', () => {
   // Carregar os itens ao iniciar
   loadCartItems();
 });
-

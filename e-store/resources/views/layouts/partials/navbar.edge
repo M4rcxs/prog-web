@@ -1,3 +1,4 @@
+
 <div id="webcrumbs" class="w-full bg-neutral-50 shadow-md">
 	<div class="w-full mx-auto flex items-center justify-between py-2 px-6">
 		<a href="{{ auth.isAuthenticated ? route('/home') : route('/') }}" 
@@ -45,7 +46,7 @@
 					<a href="{{ route('auth.show', { id: auth.user?.id }) }}" class="text-neutral-900 hover:text-primary transition-colors">
 						<i class="material-symbols-outlined">person</i>
 					</a>
-					<a href="#" class="text-neutral-900 hover:text-primary transition-colors">
+					<a href="javascript:void(0)" id="toggle-cart" class="text-neutral-900 hover:text-primary transition-colors">
 						<i class="material-symbols-outlined">shopping_bag</i>
 					</a>
 					<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
@@ -59,7 +60,7 @@
 				<a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
 					<i class="material-symbols-outlined">person</i>
 				</a>
-				<a href="#" class="text-neutral-900 hover:text-primary transition-colors">
+				<a href="javascript:void(0)" id="toggle-cart" class="text-neutral-900 hover:text-primary transition-colors">
 					<i class="material-symbols-outlined">shopping_bag</i>
 				</a>
 				<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
@@ -70,3 +71,5 @@
 		
 	</div>
 </div>
+<script src="resources/js/navbar.js"></script>
+

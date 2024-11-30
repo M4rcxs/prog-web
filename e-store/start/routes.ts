@@ -6,6 +6,7 @@ import HomeController from '#controllers/home_controller'
 import CategoriesController from '#controllers/categories_controller'
 import AuthController from '#controllers/auth_controller'
 import { middleware } from './kernel.js'
+import CartsController from '#controllers/carts_controller'
 
 // router
 //  .get('dashboard', () => {})
@@ -50,4 +51,13 @@ router.group(() => {
   router.post('/logout', [AuthController, 'logout']).as('logout')
 }).prefix('auth').as('auth')
 
+router.group(() => {
+  router.get('/', [CartsController, 'index']).as('index').use(middleware.auth())
+  router.post('/add', [CartsController, 'store']).as('store').use(middleware.auth())
+  router.patch('/:id', [CartsController, 'patch']).as('patch').use(middleware.auth())
+  router.delete('/:id', [CartsController, 'destroy']).as('destroy').use(middleware.auth())
+  router.post('/checkout', [CartsController, 'checkout']).as('checkout').use(middleware.auth())
+})
+.prefix('cart')
+.as('cart')
 
