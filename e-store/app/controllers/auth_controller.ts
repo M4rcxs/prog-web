@@ -31,16 +31,20 @@ export default class AuthController {
 
   public async loginView({ view }: HttpContext) {
     return view.render('auth/login')
-}
+  }
 
-public async create({ view }: HttpContext) {
-  return view.render('auth/create_user')
-}
+  public async create({ view }: HttpContext) {
+    return view.render('auth/create_user')
+  }
 
-  public async show({ params, response }: HttpContext) {
+  public async profile({ view }: HttpContext) {
+    return view.render('auth/userProfile')
+  }
+
+  public async show({ params, response, view }: HttpContext) {
     try {
       const user = await User.findOrFail(params.id)
-      return user
+      return view.render('auth/userProfile', { user })
     } catch (error) {
       return response.notFound('User not found')
     }
@@ -59,7 +63,7 @@ public async create({ view }: HttpContext) {
   public async patch({ params, request, response }: HttpContext) {
     try {
       const user = await User.findOrFail(params.id)
-      const data = request.only(['full_name', 'email', 'password', 'phone'])
+      const data = request.only(['full_name', 'email', 'phone'])
       user.merge(data)
       await user.save()
       return user
