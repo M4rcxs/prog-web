@@ -1,6 +1,7 @@
 <div id="webcrumbs" class="w-full bg-neutral-50 shadow-md">
 	<div class="w-full mx-auto flex items-center justify-between py-2 px-6">
-		<a href="{{ route('/') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+		<a href="{{ auth.isAuthenticated ? route('/home') : route('/') }}" 
+		   class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
 			<span class="text-4xl font-bold tracking-wider">MK</span>
 		</a>
 		<nav class="flex space-x-8">
@@ -41,7 +42,7 @@
 			@if(auth.isAuthenticated)
           <p>Usuário: {{ auth.user?.email }}</p>
 					<i class="material-symbols-outlined">search</i>
-					<a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
+					<a href="{{ route('auth.show', { id: auth.user?.id }) }}" class="text-neutral-900 hover:text-primary transition-colors">
 						<i class="material-symbols-outlined">person</i>
 					</a>
 					<a href="#" class="text-neutral-900 hover:text-primary transition-colors">
