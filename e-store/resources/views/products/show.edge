@@ -29,8 +29,10 @@
 
             <!-- Product Code -->
             <div class="text-sm text-neutral-400 mb-4">
-                Código: <span class="text-black">
-                    {{ product.id }}
+                Código: <span class="text-black">{{ product.id }}</span>
+                <!-- Exibição da Categoria -->
+                <span class="ml-4 text-neutral-400">
+                    Categoria: <span class="text-black">{{ product.category.name }}</span>
                 </span>
             </div>
 

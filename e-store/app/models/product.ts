@@ -27,5 +27,6 @@ export default class Product extends BaseModel {
   public category: any
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null // Alterar para DateTime
+  declare createdAt: DateTime | null
+  declare updatedAt: DateTime | null
 }

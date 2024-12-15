@@ -29,15 +29,19 @@
                     </div>
                     
                     <div class='flex flex-col'>
-                        <label for='category' class='mb-1 text-lg'>Categoria</label>
-                        <select id='category' name="category" class='p-2 border rounded-md'>
-                            <option value='eletronicos'>Eletrônicos</option>
-                            <option value='roupas'>Roupas</option>
-                            <option value='alimentos'>Alimentos</option>
-                            <option value='livros'>Livros</option>
-                            <option value='outros'>Outros</option>
+                        <label for='categoriaId' class='mb-1 text-lg'>Categoria</label>
+                        <select id='categoriaId' name="categoriaId" class='p-2 border rounded-md'>
+                          @each(category in categories)
+                            <option value='{{ category.id }}'>{{ category.name }}</option>
+                          @endeach
                         </select>
-                    </div>
+                      </div>
+
+                      <button type="button" class="mt-4 h-[40px] w-full bg-black text-neutral-50 rounded-full">
+                        <a href="/categories/create">
+                          Cadastrar Categoria
+                        </a>
+                      </button>
 
                     <button type="submit" class='mt-4 h-[40px] w-full bg-black text-neutral-50 rounded-full'>
                         Cadastrar Produto

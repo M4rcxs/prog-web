@@ -1,6 +1,7 @@
 import Product from '#models/product'
 import { HttpContext } from '@adonisjs/core/http'
 import ProductService from '#services/ProductService'
+import Category from '#models/category'
 
 export default class ProductsController {
 
@@ -9,15 +10,24 @@ export default class ProductsController {
     return view.render('products/products', { products })
   }
 
-  public async show({ params, view }: HttpContext) {
-    const product = await Product.find(params.id)
-    
-    if (!product) {
-      console.log('Produto não encontrado') 
+  public async show({ params, view, response }: HttpContext) {
+    try {
+        const product = await Product.query()
+            .where('id', params.id)
+            .preload('category') // Carrega a categoria associada
+            .first()
+
+        if (!product) {
+            return response.status(404).send('Produto não encontrado')
+        }
+
+        return view.render('products/show', { product })
+    } catch (error) {
+        console.error('Erro ao buscar produto:', error.message)
+        return response.status(500).send('Erro interno do servidor')
     }
-    return view.render('products/show', { product })
   }
-  
+
   public async calculateShipping({ request, response }: HttpContext) {
     const cep = request.input('cep') 
     try {
@@ -35,7 +45,7 @@ export default class ProductsController {
   }
 
   public async store({ request, response }: HttpContext) {
-    const data = request.only(['name', 'description', 'price', 'imageUrl'])	
+    const data = request.only(['name', 'description', 'price', 'imageUrl', 'categoriaId'])	
     try {
       const product = await Product.create(data)
 
@@ -49,7 +59,8 @@ export default class ProductsController {
   }
   
   public async create({ view }: HttpContext) {
-    return view.render('products/create_product')
+    const categories = await Category.all() 
+    return view.render('products/create_product', { categories }) 
   }
 
   public async destroy({ params, response }: HttpContext) {
