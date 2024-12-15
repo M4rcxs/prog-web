@@ -50,9 +50,15 @@
                 </button>
             </div>
 
-            <div class="text-sm mt-2 text-green-600">
-                Estoque: Disponível
+            <div class="text-sm mt-2">
+                Estoque:
+                @if (product.quantidade > 0)
+                    <span class="text-green-600">Disponível</span>
+                @else
+                    <span class="text-red-600">Indisponível</span>
+                @endif
             </div>
+            
 
             <hr class="my-4 border-neutral-300" />
 

@@ -23,10 +23,20 @@
                         <input id='imageUrl' name="imageUrl" class='p-2 border rounded-md' type='url' placeholder='Digite a URL da imagem do produto' required/>
                     </div>
 
-                    <div class='flex flex-col'>
-                        <label for='price' class='mb-1 text-lg'>Preço</label>
-                        <input id='price' name="price" class='p-2 border rounded-md' type='number' placeholder='Digite o preço do produto' step="0.01" required/>
+                    <div class="flex gap-4">
+                        <!-- Campo Preço -->
+                        <div class="flex-1 flex flex-col">
+                            <label for="price" class="mb-1 text-lg">Preço</label>
+                            <input id="price" name="price" class="p-2 border rounded-md" type="number" placeholder="Digite o preço do produto" step="0.01" required />
+                        </div>
+                    
+                        <!-- Campo Quantidade -->
+                        <div class="flex-1 flex flex-col">
+                            <label for="quantidade" class="mb-1 text-lg">Quantidade</label>
+                            <input id="quantidade" name="quantidade" class="p-2 border rounded-md" type="number" placeholder="Digite a quantidade do produto" min="0" required />
+                        </div>
                     </div>
+                                       
                     
                     <div class='flex flex-col'>
                         <label for='categoriaId' class='mb-1 text-lg'>Categoria</label>

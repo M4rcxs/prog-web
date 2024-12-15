@@ -19,6 +19,9 @@ export default class Product extends BaseModel {
   declare price: number
 
   @column()
+  declare quantidade: number
+
+  @column()
   declare categoriaId: number
 
   @belongsTo(() => Category, {

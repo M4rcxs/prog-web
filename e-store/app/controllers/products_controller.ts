@@ -45,11 +45,11 @@ export default class ProductsController {
   }
 
   public async store({ request, response }: HttpContext) {
-    const data = request.only(['name', 'description', 'price', 'imageUrl', 'categoriaId'])	
+    const data = request.only(['name', 'description', 'price', 'imageUrl', 'categoriaId', 'quantidade'])	
     try {
-      const product = await Product.create(data)
+      await Product.create(data)
 
-      return response.status(201).json(product)
+      return response.redirect('/home')
     } catch (error) {
       return response.status(500).json({
         message: 'Erro ao criar produto',
