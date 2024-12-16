@@ -23,21 +23,35 @@
                         <input id='imageUrl' name="imageUrl" class='p-2 border rounded-md' type='url' placeholder='Digite a URL da imagem do produto' required/>
                     </div>
 
-                    <div class='flex flex-col'>
-                        <label for='price' class='mb-1 text-lg'>Preço</label>
-                        <input id='price' name="price" class='p-2 border rounded-md' type='number' placeholder='Digite o preço do produto' step="0.01" required/>
+                    <div class="flex gap-4">
+                        <!-- Campo Preço -->
+                        <div class="flex-1 flex flex-col">
+                            <label for="price" class="mb-1 text-lg">Preço</label>
+                            <input id="price" name="price" class="p-2 border rounded-md" type="number" placeholder="Digite o preço do produto" step="0.01" required />
+                        </div>
+                    
+                        <!-- Campo Quantidade -->
+                        <div class="flex-1 flex flex-col">
+                            <label for="quantidade" class="mb-1 text-lg">Quantidade</label>
+                            <input id="quantidade" name="quantidade" class="p-2 border rounded-md" type="number" placeholder="Digite a quantidade do produto" min="0" required />
+                        </div>
                     </div>
+                                       
                     
                     <div class='flex flex-col'>
-                        <label for='category' class='mb-1 text-lg'>Categoria</label>
-                        <select id='category' name="category" class='p-2 border rounded-md'>
-                            <option value='eletronicos'>Eletrônicos</option>
-                            <option value='roupas'>Roupas</option>
-                            <option value='alimentos'>Alimentos</option>
-                            <option value='livros'>Livros</option>
-                            <option value='outros'>Outros</option>
+                        <label for='categoriaId' class='mb-1 text-lg'>Categoria</label>
+                        <select id='categoriaId' name="categoriaId" class='p-2 border rounded-md'>
+                          @each(category in categories)
+                            <option value='{{ category.id }}'>{{ category.name }}</option>
+                          @endeach
                         </select>
-                    </div>
+                      </div>
+
+                      <button type="button" class="mt-4 h-[40px] w-full bg-black text-neutral-50 rounded-full">
+                        <a href="/categories/create">
+                          Cadastrar Categoria
+                        </a>
+                      </button>
 
                     <button type="submit" class='mt-4 h-[40px] w-full bg-black text-neutral-50 rounded-full'>
                         Cadastrar Produto

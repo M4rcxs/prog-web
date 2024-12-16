@@ -2,10 +2,10 @@ import { HttpContext } from '@adonisjs/core/http'
 import Category from '#models/category'
 
 export default class CategoriesController {
-	public async index({ view }: HttpContext) {
-		const categories = await Category.all()
-		return view.render('categories/categories', { categories })
-	}
+	public async index({}: HttpContext) {
+    const categories = await Category.all()
+    return categories
+  }
 	
 	public async show({ params, view }: HttpContext) {
     const category = await Category.find(params.id)
@@ -31,7 +31,7 @@ export default class CategoriesController {
   }
   
   public async create({ view }: HttpContext) {
-    return view.render('category/create_category')
+    return view.render('categories/create_category')
   }
 
   public async destroy({ params, response }: HttpContext) {
