@@ -1,0 +1,30 @@
+<div id="webcrumbs" class="flex justify-center">
+    <div class="w-full p-10 rounded-lg">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @each(product in products)
+            <div class="bg-neutral-50 w-full rounded-lg shadow-md p-4 h-full">
+                <img src="{{ product.imageUrl }}" alt="Product"
+                    class="w-full h-[300px] object-cover rounded-md" />
+                <div class="relative -mt-8 text-center">
+                    <a class="rounded-full bg-white text-black font-semibold text-sm px-4 py-2 shadow-md"
+                        href="{{ route('products.show', { id: product.id }) }}">
+                        View Product
+                    </a>
+                </div>
+                <div class="mt-6 text-center">
+                    <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+                    <p class="text-sm text-neutral-600 mt-2">
+                        {{ product.description }}
+                    </p>
+                </div>
+                <div class="flex justify-between items-center mt-6">
+                    <span class="text-lg font-semibold">${{ product.price }}</span>
+                    <button class="rounded-md bg-neutral-900 py-2 px-4 text-white text-sm">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            @endeach
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+@include('layouts/main')
+    <!-- Contêiner centralizado -->
+    <div class="flex justify-center items-center min-h-[100vh] bg-gray">
+        <div id="webcrumbs">
+            <div class='w-[500px] min-h-[400px] bg-neutral-50 shadow-md rounded-lg p-6'>
+                <h1 class='font-title text-3xl mb-6'>Cadastrar Categoria</h1>
+                
+                <!-- Formulário para cadastrar a categoria -->
+                <form action="/categories/store" method="POST" class='flex flex-col gap-4'>
+                    
+                    <!-- Campo Nome -->
+                    <div class='flex flex-col'>
+                        <label for='name' class='mb-1 text-lg'>Nome da Categoria</label>
+                        <input id='name' name="name" class='p-2 border rounded-md' type='text' placeholder='Digite o nome da categoria' required/>
+                    </div>
+
+                    <!-- Campo Descrição -->
+                    <div class='flex flex-col'>
+                        <label for='description' class='mb-1 text-lg'>Descrição</label>
+                        <textarea id='description' name="description" class='p-2 border rounded-md' rows='4' placeholder='Digite uma descrição da categoria' required></textarea>
+                    </div>
+
+                    <!-- Botão Salvar -->
+                    <button type="submit" class='mt-4 h-[40px] w-full bg-blue-500 text-neutral-50 rounded-full'>
+                        Salvar Categoria
+                    </button>
+                </form>
+
+                <!-- Botão Voltar -->
+                <div class="flex justify-end mt-4">
+                    <a href="{{ route('products.create') }}" class="h-[40px] px-4 bg-gray-300 text-black rounded-md shadow-md text-center">
+                        Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>

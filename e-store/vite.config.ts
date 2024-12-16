@@ -5,13 +5,18 @@ export default defineConfig({
   plugins: [
     adonisjs({
       /**
-       * Entrypoints of your application. Each entrypoint will
-       * result in a separate bundle.
+       * Entrypoints da sua aplicação. Cada entrypoint resultará em um
+       * bundle separado.
        */
-      entrypoints: ['resources/css/app.css', 'resources/js/app.js'],
+      entrypoints: [
+        'resources/css/app.css', // Estilos globais
+        'resources/js/app.js', // Script global
+        'resources/js/navbar.js', // Script para Navbar
+        'resources/js/cartSide.js', // Script para Carrinho Lateral
+      ],
 
       /**
-       * Paths to watch and reload the browser on file change
+       * Caminhos para assistir e recarregar o navegador ao alterar arquivos
        */
       reload: ['resources/views/**/*.edge'],
     }),

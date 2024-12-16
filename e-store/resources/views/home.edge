@@ -1,0 +1,32 @@
+@include('layouts/main')
+<div class="flex justify-center">
+    {{--  @include('layouts/partials/hero')  --}}
+</div>
+
+<div class="flex justify-center">
+    <div class="flex justify-center items-center">
+        <h1 class="items-center justify-center font-semibold text-7xl">
+            DESTAQUES
+        </h1>
+    </div>
+</div>
+<div>
+
+    @component('components/product', { products: products })
+    @endcomponent
+</div>
+<div class="flex justify-center items-center">
+    <h1 class="items-center justify-center font-semibold text-7xl">
+        OS MAIS VENDIDOS
+    </h1>
+</div>
+<div>
+
+    @component('components/product', { products: products })
+    @endcomponent
+</div>
+<div>
+    @include('layouts/partials/footer')
+</div>
+
+</div>
