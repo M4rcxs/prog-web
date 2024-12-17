@@ -46,7 +46,7 @@ export default class AuthController {
       const user = await User.findOrFail(params.id)
       return view.render('auth/userProfile', { user })
     } catch (error) {
-      return response.notFound('User not found')
+      return response.redirect().toRoute('index')
     }
   }
 
@@ -73,11 +73,8 @@ export default class AuthController {
   }
 
   public async logout({ auth, response }: HttpContext) {
-    try {
-      await auth.use('web').logout()
-      return response.ok({ message: 'User logged out successfully' })
-    } catch (error) {
-      return response.internalServerError('Error logging out user')
-    }
+    await auth.use('web').logout()
+
+    return response.redirect().toRoute('/home')
   }
 }
