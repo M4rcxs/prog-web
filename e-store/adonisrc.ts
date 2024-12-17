@@ -36,6 +36,7 @@ export default defineConfig({
     () => import('@adonisjs/static/static_provider'),
     () => import('@adonisjs/lucid/database_provider'),
     () => import('@adonisjs/auth/auth_provider'),
+    () => import('@adonisjs/i18n/i18n_provider')
   ],
 
   /*
@@ -82,6 +83,10 @@ export default defineConfig({
       pattern: 'public/**',
       reloadServer: false,
     },
+    {
+      pattern: 'resources/lang/**/*.{json,yaml,yml}',
+      reloadServer: false,
+    }
   ],
 
   assetsBundler: false,

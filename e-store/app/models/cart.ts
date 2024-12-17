@@ -18,10 +18,13 @@ export default class Cart extends BaseModel {
   declare updatedAt: DateTime
 
   @belongsTo(() => User, {
-    foreignKey: 'UserId',
+    foreignKey: 'user_id',
   })
   public user: any
 
-  @hasMany(() => ItensCart)
+  @hasMany(() => ItensCart,{
+    foreignKey: 'cart_id',
+  }
+)
  declare posts: HasMany<typeof ItensCart>
 }

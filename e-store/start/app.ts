@@ -1,5 +1,6 @@
 const providers = [
-  '@adonisjs/lucid/build/providers/LucidProvider', // Registra o Lucid ORM
+  '@adonisjs/lucid/build/providers/LucidProvider',
+  '@adonisjs/i18n/build/providers/I18nProvider',
 ]
 
 const aceProviders = []

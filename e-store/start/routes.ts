@@ -61,6 +61,7 @@ router
 router
   .group(() => {
     router.get('/', [CartsController, 'index']).as('index').use(middleware.auth())
+    //router.get('/get', [CartsController, 'getByUser']).as('getCart').use(middleware.auth())
     router.post('/add', [CartsController, 'store']).as('store').use(middleware.auth())
     router.patch('/:id', [CartsController, 'patch']).as('patch').use(middleware.auth())
     router.delete('/:id', [CartsController, 'destroy']).as('destroy').use(middleware.auth())

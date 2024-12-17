@@ -13,6 +13,7 @@ export default defineConfig({
         'resources/js/app.js', // Script global
         'resources/js/navbar.js', // Script para Navbar
         'resources/js/cartSide.js', // Script para Carrinho Lateral
+        'resources/js/cart.js', // Adiciona o script do carrinho
       ],
 
       /**

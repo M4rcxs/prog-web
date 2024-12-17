@@ -24,13 +24,13 @@ export default class ItensCart extends BaseModel {
 
   // Definir relacionamento com Cart
   @belongsTo(() => Cart, {
-    foreignKey: 'CartId',
+    foreignKey: 'cart_id',
   })
   public cart: any
 
   // Definir relacionamento com Product
   @belongsTo(() => Product, {
-    foreignKey: 'ProductId',
+    foreignKey: 'product_id',
   })
   public product: any
 }
