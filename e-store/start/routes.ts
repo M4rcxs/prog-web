@@ -50,7 +50,7 @@ router
     router.post('/store', [AuthController, 'store']).as('store') // Rota para realizar o login
     router.get('/create', [AuthController, 'create']).as('create_user')
     router.get('/:id', [AuthController, 'show']).as('show').use(middleware.auth())
-    router.post('/userProfile', [AuthController, 'profile']).as('profile').use(middleware.auth())
+    router.get('/userProfile', [AuthController, 'profile']).as('profile').use(middleware.auth())
     router.delete('/:id', [AuthController, 'destroy']).as('destroy')
     router.patch('/:id', [AuthController, 'patch']).as('patch')
     router.post('/logout', [AuthController, 'logout']).as('logout').use(middleware.auth())
