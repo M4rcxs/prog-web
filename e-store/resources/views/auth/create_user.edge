@@ -11,7 +11,8 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="full_name">
                     {{ i18n.t('auth.create_user.full_name') }}
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                <input 
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="full_name" 
                     type="text" 
                     placeholder="{{ i18n.t('auth.create_user.full_name_placeholder') }}" 
@@ -24,7 +25,8 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                     {{ i18n.t('auth.create_user.email') }}
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                <input 
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="email" 
                     type="email" 
                     placeholder="{{ i18n.t('auth.create_user.email_placeholder') }}" 
@@ -35,19 +37,20 @@
             <!-- Senha -->
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-
-                    Sua senha
+                    {{ i18n.t('auth.create_user.password') }}
                 </label>
                 <div class="relative">
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                    <input 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="password" 
                         type="password" 
-
                         placeholder="********" 
                         name="password" 
                         required>
-                    <!-- Botão para alternar a visualização da senha -->
-                    <button type="button" onclick="togglePassword('password', this)" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
+                    <button 
+                        type="button" 
+                        onclick="togglePassword('password', this)" 
+                        class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
                         👁️
                     </button>
                 </div>
@@ -56,29 +59,23 @@
             <!-- Campo de Confirmação da Senha -->
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm_password">
-                    Confirme sua senha
+                    {{ i18n.t('auth.create_user.confirm_password') }}
                 </label>
                 <div class="relative">
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                    <input 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="confirm_password" 
                         type="password" 
                         placeholder="********" 
                         name="confirm_password" 
                         required>
-                    <!-- Botão para alternar a visualização da confirmação de senha -->
-                    <button type="button" onclick="togglePassword('confirm_password', this)" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
+                    <button 
+                        type="button" 
+                        onclick="togglePassword('confirm_password', this)" 
+                        class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
                         👁️
                     </button>
                 </div>
-            </div>
-            <script>
-                function togglePassword(id, el) {
-                    const passwordField = document.getElementById(id);
-                    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-                    passwordField.setAttribute('type', type);
-                    el.textContent = type === 'password' ? '👁️' : '🙈';
-                }
-            </script>
                 <p id="confirm_password_error" class="text-red-500 text-sm hidden">As senhas não coincidem.</p>
             </div>
             <!-- Telefone -->
@@ -86,10 +83,10 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
                     {{ i18n.t('auth.create_user.phone') }}
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                <input 
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="phone" 
                     type="text" 
-
                     placeholder="(21) 99999-9999" 
                     name="phone" 
                     required>
@@ -97,15 +94,16 @@
             </div>
             <!-- Botão Criar Conta -->
             <div class="flex items-center justify-between">
-                <button class="bg-black hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                <button 
+                    class="bg-black hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
                     type="submit">
                     {{ i18n.t('auth.create_user.create_button') }}
                 </button>
-            </div>            
+            </div>
         </form>
         <div class="text-center mt-4">
             <span class="text-sm text-gray-600">{{ i18n.t('auth.create_user.already_have_account') }}</span>
-            <a href="/auth/login" class="text-sm text-black-600 hover:underline">
+            <a href="/auth/login" class="text-sm text-black hover:underline">
                 {{ i18n.t('auth.create_user.login_here') }}
             </a>
         </div>
@@ -117,8 +115,6 @@
         const passwordField = document.getElementById(id);
         const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordField.setAttribute('type', type);
-
-        // Altera o ícone para refletir se a senha está visível ou não
         el.textContent = type === 'password' ? '👁️' : '🙈';
     }
 
@@ -137,7 +133,7 @@
             document.getElementById('confirm_password_error').classList.add('hidden');
         }
 
-        // Valida se a senha tem pelo menos 4 caracteres
+        // Valida se a senha tem pelo menos 5 caracteres
         if (password.length < 5) {
             document.getElementById('password_error').classList.remove('hidden');
             isValid = false;
