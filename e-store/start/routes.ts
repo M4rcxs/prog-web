@@ -42,6 +42,7 @@ router
 
 router.get('/', [HomeController, 'index']).as('index')
 router.get('/home', [HomeController, 'indexAuth']).as('indexAuth').use(middleware.auth())
+router.post('/locale/:locale', [HomeController, 'locale']).as('locale')
 
 router
   .group(() => {

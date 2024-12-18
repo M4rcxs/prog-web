@@ -3,18 +3,18 @@
 <div class="flex justify-center h-screen items-center bg-gray-100">
     <div class="w-full max-w-lg bg-white shadow-md rounded px-12 py-10 mb-6">
         <h1 class="text-center text-3xl font-semibold text-black mb-8">
-            Criar Usuário
+            {{ i18n.t('auth.create_user.title') }}
         </h1>
         <form id="registerForm" action="/auth/register" method="POST">
             <!-- Nome Completo -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="full_name">
-                    Nome Completo
+                    {{ i18n.t('auth.create_user.full_name') }}
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="full_name" 
                     type="text" 
-                    placeholder="Seu nome completo" 
+                    placeholder="{{ i18n.t('auth.create_user.full_name_placeholder') }}" 
                     name="full_name" 
                     required>
                 <p id="full_name_error" class="text-red-500 text-sm hidden">Este campo é obrigatório.</p>
@@ -22,24 +22,27 @@
             <!-- E-mail -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                    Seu e-mail
+                    {{ i18n.t('auth.create_user.email') }}
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="email" 
                     type="email" 
-                    placeholder="contato@progweb.com" 
+                    placeholder="{{ i18n.t('auth.create_user.email_placeholder') }}" 
                     name="email" 
                     required>
                 <p id="email_error" class="text-red-500 text-sm hidden">Por favor, insira um e-mail válido.</p>
             </div>
+            <!-- Senha -->
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+
                     Sua senha
                 </label>
                 <div class="relative">
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         id="password" 
                         type="password" 
+
                         placeholder="********" 
                         name="password" 
                         required>
@@ -67,16 +70,26 @@
                         👁️
                     </button>
                 </div>
+            </div>
+            <script>
+                function togglePassword(id, el) {
+                    const passwordField = document.getElementById(id);
+                    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordField.setAttribute('type', type);
+                    el.textContent = type === 'password' ? '👁️' : '🙈';
+                }
+            </script>
                 <p id="confirm_password_error" class="text-red-500 text-sm hidden">As senhas não coincidem.</p>
             </div>
             <!-- Telefone -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
-                    Telefone
+                    {{ i18n.t('auth.create_user.phone') }}
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="phone" 
                     type="text" 
+
                     placeholder="(21) 99999-9999" 
                     name="phone" 
                     required>
@@ -86,13 +99,15 @@
             <div class="flex items-center justify-between">
                 <button class="bg-black hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
                     type="submit">
-                    Criar Conta
+                    {{ i18n.t('auth.create_user.create_button') }}
                 </button>
             </div>            
         </form>
         <div class="text-center mt-4">
-            <span class="text-sm text-gray-600">Já tem conta?</span>
-            <a href="/auth/login" class="text-sm text-black-600 hover:underline">Fazer Login</a>
+            <span class="text-sm text-gray-600">{{ i18n.t('auth.create_user.already_have_account') }}</span>
+            <a href="/auth/login" class="text-sm text-black-600 hover:underline">
+                {{ i18n.t('auth.create_user.login_here') }}
+            </a>
         </div>
     </div>
 </div>
