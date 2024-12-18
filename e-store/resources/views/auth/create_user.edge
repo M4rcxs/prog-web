@@ -48,7 +48,7 @@
                         👁️
                     </button>
                 </div>
-                <p id="password_error" class="text-red-500 text-sm hidden">A senha deve ter pelo menos 4 caracteres.</p>
+                <p id="password_error" class="text-red-500 text-sm hidden">A senha deve ter pelo menos 5 caracteres.</p>
             </div>
             <!-- Campo de Confirmação da Senha -->
             <div class="mb-6">
@@ -123,7 +123,7 @@
         }
 
         // Valida se a senha tem pelo menos 4 caracteres
-        if (password.length < 4) {
+        if (password.length < 5) {
             document.getElementById('password_error').classList.remove('hidden');
             isValid = false;
         } else {
