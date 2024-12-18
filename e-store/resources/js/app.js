@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Renderizar os itens do carrinho
   function renderCartItems(items) {
     cartItemsContainer.innerHTML = '';
 
@@ -69,17 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
       cartItemsContainer.appendChild(cartItem);
     });
 
-    // Adicionar evento de remover item
     document.querySelectorAll('.remove-item').forEach(button => {
       button.addEventListener('click', async (e) => {
         const itemId = e.target.getAttribute('data-id');
         await removeItemFromCart(itemId);
-        await loadCartItems(); // Recarregar os itens
+        await loadCartItems();
       });
     });
   }
 
-  // Remover item do carrinho
   async function removeItemFromCart(itemId) {
     try {
       const response = await fetch(`/cart/${itemId}`, {
@@ -97,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Finalizar compra
   checkoutButton.addEventListener('click', async () => {
     try {
       const response = await fetch('/cart/checkout', {
@@ -112,15 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       alert('Compra finalizada com sucesso!');
-      cart.classList.remove('open'); // Fecha o carrinho
-      await loadCartItems(); // Limpa o carrinho
+      cart.classList.remove('open');
+      await loadCartItems();
     } catch (error) {
       console.error(error);
       alert('Erro ao finalizar a compra');
     }
   });
 
-  // Carregar os itens ao iniciar
   loadCartItems();
 });
 

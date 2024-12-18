@@ -79,7 +79,7 @@ export default class CartsController {
 
       if (item) {
         // Atualizar quantidade se o item já existir
-        item.quantity += quantity
+        //item.quantity += quantity
         await item.save()
       } else {
         // Adicionar novo item
