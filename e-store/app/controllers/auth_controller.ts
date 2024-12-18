@@ -16,7 +16,7 @@ export default class AuthController {
 
         user.merge(data) // Atualiza apenas os campos fornecidos
         await user.save() // Salva as alterações no banco de dados
-        return response.redirect().toRoute('auth.profile', { id: user.id }) // Redireciona após a edição
+        return response.redirect().toRoute('/home') // Redireciona após a edição
       } catch (error) {
         console.error('Erro ao buscar usuário:', error.message)
         return response.status(404).send('Usuário não encontrado.')
@@ -29,27 +29,30 @@ export default class AuthController {
         return response.redirect().toRoute('auth.login') // Redireciona para a rota de login
       } catch (error) {
         console.error('Erro ao criar usuário:', error.message)
-        return response.status(400).send('Erro ao criar usuário.')
+        return response.redirect().toRoute('auth.login') // Retorna os erros de validação
       }
     }
   }
 
-  async store({ auth, request, response }: HttpContext) {
+  async store({ auth, request, response, session }: HttpContext) {
     const { email, password } = await request.validateUsing(createAuthValidator)
 
     const user = await User.findBy('email', email)
 
     if (!user) {
-      return response.abort('E-mail inválido')
+      session.flash({ error: 'E-mail ou senha inválidos' })
+      return response.redirect().toRoute('/auth/login')
     }
 
-    await User.verifyCredentials(email, password)
-
-    await auth.use('web').login(user)
-
-    return response.redirect().toRoute('/home')
+    try {
+      await User.verifyCredentials(email, password)
+      await auth.use('web').login(user)
+      return response.redirect().toRoute('/home')
+    } catch {
+      session.flash({ error: 'E-mail ou senha inválidos' })
+      return response.redirect().toRoute('/auth/login')
+    }
   }
-
   public async loginView({ view }: HttpContext) {
     return view.render('auth/login')
   }
