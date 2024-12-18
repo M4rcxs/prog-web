@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       renderCartItems(cart.posts);
     } catch (error) {
       console.error(error);
-      cartItemsContainer.innerHTML = '<p>Erro ao carregar o carrinho</p>';
+      cartItemsContainer.innerHTML = '<p>Carrinho vazio.</p>';
     }
   }
 
