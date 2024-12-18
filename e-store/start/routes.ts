@@ -47,7 +47,7 @@ router.post('/locale/:locale', [HomeController, 'locale']).as('locale')
 router
   .group(() => {
     router.get('/login', [AuthController, 'loginView']).as('login') // Rota para abrir a página de login
-    router.post('/register', [AuthController, 'register']).as('register')
+    router.post('/register/:id?', [AuthController, 'register']).as('register')
     router.post('/store', [AuthController, 'store']).as('store') // Rota para realizar o login
     router.get('/create', [AuthController, 'create']).as('create_user')
     router.get('/:id', [AuthController, 'show']).as('show').use(middleware.auth())

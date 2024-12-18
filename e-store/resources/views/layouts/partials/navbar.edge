@@ -1,75 +1,97 @@
-
 <div id="webcrumbs" class="w-full bg-neutral-50 shadow-md">
 	<div class="w-full mx-auto flex items-center justify-between py-2 px-6">
-		<a href="{{ auth.isAuthenticated ? route('/home') : route('/') }}" 
-		   class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-			<span class="text-4xl font-bold tracking-wider">MK</span>
-		</a>
-		<nav class="flex space-x-8">
-			<a href="#"
-				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-				LANÇAMENTOS
-			</a>
-			<a href="#"
-				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-				ACESSÓRIOS
-			</a>
-			<a href="#"
-				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-				BONÉS
-			</a>
-			<a href="#"
-				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-				CALÇADOS
-			</a>
-			<a href="#"
-				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-				ROUPAS
-			</a>
-			<a href="#"
-				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-				SKATE
-			</a>
-			<a href="#"
-				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-				MARCAS
-			</a>
-			<a href="#"
-				class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
-				PROMOÇÕES
-			</a>
-		</nav>
-		<div class="flex space-x-4">
-			@if(auth.isAuthenticated)
-          <p>Usuário: {{ auth.user?.email }}</p>
-					<i class="material-symbols-outlined">search</i>
-					<a href="{{ route('auth.show', { id: auth.user?.id }) }}" class="text-neutral-900 hover:text-primary transition-colors">
-						<i class="material-symbols-outlined">person</i>
-					</a>
-					<a href="javascript:void(0)" id="toggle-cart" class="text-neutral-900 hover:text-primary transition-colors">
-						<i class="material-symbols-outlined">shopping_bag</i>
-					</a>
-					<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
-						<i class="material-symbols-outlined">admin_panel_settings</i> <!-- New icon added here -->
-					</a>
-					{{--  <a href="{{ route('/auth/logout') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
-						<i class="material-symbols-outlined">logout</i> 
-					</a>  --}}
-      @else
-				<i class="material-symbols-outlined">search</i>
-				<a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
-					<i class="material-symbols-outlined">person</i>
-				</a>
-				<a href="javascript:void(0)" id="toggle-cart" class="text-neutral-900 hover:text-primary transition-colors">
-					<i class="material-symbols-outlined">shopping_bag</i>
-				</a>
-				<a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
-					<i class="material-symbols-outlined">admin_panel_settings</i> <!-- New icon added here -->
-				</a>
-			@endif
-		</div>
-		
+	  <a href="{{ auth.isAuthenticated ? route('/home') : route('/') }}" 
+		 class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">
+		<span class="text-4xl font-bold tracking-wider">MK</span>
+	  </a>
+	  
+	  <!-- Mobile Menu Toggle Button -->
+	  <button id="mobile-menu-toggle" class="lg:hidden text-neutral-900 hover:text-primary">
+		<i class="material-symbols-outlined">menu</i>
+	  </button>
+  
+	  <!-- Desktop Navigation -->
+	  <nav class="hidden lg:flex space-x-8">
+		<a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">LANÇAMENTOS</a>
+		<a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">ACESSÓRIOS</a>
+		<a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">BONÉS</a>
+		<a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">CALÇADOS</a>
+		<a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">ROUPAS</a>
+		<a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">SKATE</a>
+		<a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">MARCAS</a>
+		<a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">PROMOÇÕES</a>
+	  </nav>
+  
+	  <!-- User Actions -->
+	  <div class="hidden lg:flex space-x-4">
+		@if(auth.isAuthenticated)
+		  <p>Usuário: <b>{{ auth.user?.full_name }}</b></p>
+		  <i class="material-symbols-outlined">search</i>
+		  <a href="{{ route('auth.show', { id: auth.user?.id }) }}" class="text-neutral-900 hover:text-primary transition-colors">
+			<i class="material-symbols-outlined">person</i>
+		  </a>
+		  <a href="javascript:void(0)" id="toggle-cart" class="text-neutral-900 hover:text-primary transition-colors">
+			<i class="material-symbols-outlined">shopping_bag</i>
+		  </a>
+		  <a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
+			<i class="material-symbols-outlined">admin_panel_settings</i>
+		  </a>
+		@else
+		  <i class="material-symbols-outlined">search</i>
+		  <a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
+			<i class="material-symbols-outlined">person</i>
+		  </a>
+		  <a href="javascript:void(0)" id="toggle-cart" class="text-neutral-900 hover:text-primary transition-colors">
+			<i class="material-symbols-outlined">shopping_bag</i>
+		  </a>
+		  <a href="{{ route('/products/create') }}" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors flex items-center space-x-1">
+			<i class="material-symbols-outlined">admin_panel_settings</i>
+		  </a>
+		@endif
+	  </div>
 	</div>
-</div>
-<script src="resources/js/navbar.js"></script>
-
+  
+	<!-- Mobile Navigation -->
+	<nav id="mobile-menu" class="hidden flex flex-col space-y-2 py-4 px-6 lg:hidden bg-neutral-50 shadow-md">
+	  @if(auth.isAuthenticated)
+		<p class="text-sm font-medium tracking-wider text-neutral-900">Usuário: <b>{{ auth.user?.full_name }}</b></p>
+		<div class="flex items-center space-x-4">
+		  <i class="material-symbols-outlined">search</i>
+		  <a href="{{ route('auth.show', { id: auth.user?.id }) }}" class="text-neutral-900 hover:text-primary transition-colors">
+			<i class="material-symbols-outlined">person</i>
+		  </a>
+		  <a href="javascript:void(0)" id="toggle-cart" class="text-neutral-900 hover:text-primary transition-colors">
+			<i class="material-symbols-outlined">shopping_bag</i>
+		  </a>
+		</div>
+	  @else
+		<div class="flex items-center space-x-4">
+		  <i class="material-symbols-outlined">search</i>
+		  <a href="{{ route('/auth/login') }}" class="text-neutral-900 hover:text-primary transition-colors">
+			<i class="material-symbols-outlined">person</i>
+		  </a>
+		  <a href="javascript:void(0)" id="toggle-cart" class="text-neutral-900 hover:text-primary transition-colors">
+			<i class="material-symbols-outlined">shopping_bag</i>
+		  </a>
+		</div>
+	  @endif
+	  <a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">LANÇAMENTOS</a>
+	  <a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">ACESSÓRIOS</a>
+	  <a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">BONÉS</a>
+	  <a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">CALÇADOS</a>
+	  <a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">ROUPAS</a>
+	  <a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">SKATE</a>
+	  <a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">MARCAS</a>
+	  <a href="#" class="text-sm font-medium tracking-wider text-neutral-900 hover:text-primary transition-colors">PROMOÇÕES</a>
+	</nav>
+  </div>
+  
+  <script>
+	const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+	const mobileMenu = document.getElementById('mobile-menu');
+  
+	mobileMenuToggle.addEventListener('click', () => {
+	  mobileMenu.classList.toggle('hidden');
+	});
+  </script>
+  

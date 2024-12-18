@@ -5,6 +5,11 @@
         <h1 class="text-center text-3xl font-semibold text-black-600 mb-8">
             Login
         </h1>
+        @if (flashMessages.get('error'))
+            <div class="mb-4 text-red-500 text-sm font-bold text-center">
+                {{ flashMessages.get('error') }}
+            </div>
+        @endif
         <form action="/auth/store" method="POST">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
