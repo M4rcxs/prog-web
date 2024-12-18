@@ -5,6 +5,11 @@
         <h1 class="text-center text-3xl font-semibold text-black-600 mb-8">
             Login
         </h1>
+        @if (flashMessages.get('error'))
+            <div class="mb-4 text-red-500 text-sm font-bold text-center">
+                {{ flashMessages.get('error') }}
+            </div>
+        @endif
         <form action="/auth/store" method="POST">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
@@ -33,7 +38,7 @@
                 <label class="text-sm text-gray-700" for="remember">Manter-me logado</label>
             </div>
             <div class="flex items-center justify-between">
-                <button class="bg-black hover:bg-white text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                <button class="bg-black hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
                     type="submit">
                     Logar
                 </button>

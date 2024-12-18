@@ -11,139 +11,51 @@
     <div class="w-full lg:w-2/3 bg-white p-6 rounded shadow-md">
       <h1 class="text-2xl font-bold mb-6">Perfil do Usuário</h1>
       
-      <form method="PATCH" action="{{ route('auth.patch', { id: auth.user?.id }) }}">
-        <div class="mb-4">
-          <label for="full_name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-          <input 
-            type="text" 
-            id="full_name" 
-            name="full_name" 
-            value="{{ auth.user?.full_name }}" 
-            class="mt-1 block w-full border border-gray-300 rounded p-2" 
-            required>
-        </div>
-
-        <div class="mb-4">
-          <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            value="{{ auth.user?.email }}" 
-            class="mt-1 block w-full border border-gray-300 rounded p-2" 
-            required>
-        </div>
-
-        <div class="mb-4">
-          <label for="phone" class="block text-sm font-medium text-gray-700">Telefone</label>
-          <input 
-            type="text" 
-            id="phone" 
-            name="phone" 
-            value="{{ auth.user?.phone }}" 
-            class="mt-1 block w-full border border-gray-300 rounded p-2">
-        </div>
-
-				<!-- Verifica se o usuário não tem endereço -->
-				@if(!auth.user?.address)
-					<div class="mb-4">
-						<button 
-							type="button" 
-							id="addAddressButton"
-							class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition">
-							Adicione um endereço de entrega
-						</button>
-					</div>
-	
-					<!-- Formulário de endereço (inicialmente escondido) -->
-					<div id="addressForm" class="hidden">
-						<div class="mb-4">
-							<label for="cep" class="block text-sm font-medium text-gray-700">CEP</label>
-							<input 
-								type="text" 
-								id="cep" 
-								name="cep" 
-								class="mt-1 block w-full border border-gray-300 rounded p-2">
-						</div>
-						<div class="mb-4">
-							<label for="street" class="block text-sm font-medium text-gray-700">Endereço (rua, avenida, quadra, lote)</label>
-							<input 
-								type="text" 
-								id="street" 
-								name="street" 
-								class="mt-1 block w-full border border-gray-300 rounded p-2">
-						</div>
-						<div class="mb-4">
-							<label for="number" class="block text-sm font-medium text-gray-700">Número</label>
-							<input 
-								type="text" 
-								id="number" 
-								name="number" 
-								placeholder="Use 's/n' caso não tenha número" 
-								class="mt-1 block w-full border border-gray-300 rounded p-2">
-						</div>
-						<div class="mb-4">
-							<label for="complement" class="block text-sm font-medium text-gray-700">Complemento</label>
-							<input 
-								type="text" 
-								id="complement" 
-								name="complement" 
-								class="mt-1 block w-full border border-gray-300 rounded p-2">
-						</div>
-						<div class="mb-4">
-							<label for="neighborhood" class="block text-sm font-medium text-gray-700">Bairro</label>
-							<input 
-								type="text" 
-								id="neighborhood" 
-								name="neighborhood" 
-								class="mt-1 block w-full border border-gray-300 rounded p-2">
-						</div>
-						<div class="mb-4 flex space-x-4">
-							<div class="w-1/2">
-								<label for="city" class="block text-sm font-medium text-gray-700">Cidade</label>
-								<input 
-									type="text" 
-									id="city" 
-									name="city" 
-									class="mt-1 block w-full border border-gray-300 rounded p-2">
-							</div>
-							<div class="w-1/2">
-								<label for="state" class="block text-sm font-medium text-gray-700">Estado</label>
-								<input 
-									type="text" 
-									id="state" 
-									name="state" 
-									class="mt-1 block w-full border border-gray-300 rounded p-2">
-							</div>
-						</div>
-					</div>
-	
-					<script>
-						document.getElementById('addAddressButton').addEventListener('click', function () {
-							const addressForm = document.getElementById('addressForm');
-							addressForm.classList.remove('hidden');
-						});
-					</script>
-				@else
-					<!-- Caso o endereço exista -->
-					<div class="mb-4">
-						<label for="address" class="block text-sm font-medium text-gray-700">Endereço</label>
-						<textarea 
-							id="address" 
-							name="address" 
-							rows="3" 
-							class="mt-1 block w-full border border-gray-300 rounded p-2" readonly>{{ auth.user?.address }}</textarea>
-					</div>
-				@endif
-
-        <div class="flex justify-end">
-          <button 
-            type="submit" 
-            class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition">
-            Salvar Alterações
-          </button>
-        </div>
-      </form>
+      <form method="POST" action="{{ route('auth.register', { id: auth.user?.id }) }}">
+		<input type="hidden" name="_method" value="{{ auth.user?.id ? 'PUT' : 'POST' }}">
+		<input type="hidden" name="id" value="{{ auth.user?.id }}">
+	  
+		<div class="mb-4">
+		  <label for="full_name" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+		  <input 
+			type="text" 
+			id="full_name" 
+			name="full_name" 
+			value="{{ auth.user?.full_name }}" 
+			class="mt-1 block w-full border border-gray-300 rounded p-2" 
+			required>
+		</div>
+	  
+		<div class="mb-4">
+		  <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+		  <input 
+			type="email" 
+			id="email" 
+			name="email" 
+			value="{{ auth.user?.email }}" 
+			class="mt-1 block w-full border border-gray-300 rounded p-2" 
+			required>
+		</div>
+	  
+		<div class="mb-4">
+		  <label for="phone" class="block text-sm font-medium text-gray-700">Telefone</label>
+		  <input 
+			type="text" 
+			id="phone" 
+			name="phone" 
+			value="{{ auth.user?.phone }}" 
+			class="mt-1 block w-full border border-gray-300 rounded p-2">
+		</div>
+	  
+		<div class="flex justify-end">
+		  <button 
+			type="submit" 
+			class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition">
+			Salvar Alterações
+		  </button>
+		</div>
+	  </form>
+	  
     </div>
   </div>
 </div>

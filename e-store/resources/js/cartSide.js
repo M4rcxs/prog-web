@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       cartItem.innerHTML = `
         <div class="flex items-center space-x-4">
-          <img src="${product.image}" alt="${product.name}" class="w-16 h-16 rounded object-cover">
+          <img src="${product.imageUrl}" alt="${product.name}" class="w-16 h-16 rounded object-cover">
           <div>
             <h3 class="text-sm font-bold">${product.name}</h3>
             <p class="text-sm text-gray-500">Quantidade: ${item.quantity}</p>

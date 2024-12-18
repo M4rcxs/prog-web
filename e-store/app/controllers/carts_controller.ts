@@ -6,26 +6,56 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class CartsController {
   // Exibir o carrinho do usuário logado
   public async index({ auth, view, response }: HttpContext) {
-		try {
-			// Obtém o usuário autenticado
+
 			const user = await auth.use('web').authenticate();
-	
-			// Busca o carrinho associado ao usuário logado
+
+      if (!user) {
+        return response.unauthorized('Você precisa estar logado para acessar esta rota.');
+      } 
+
 			const cart = await Cart.query()
 				.where('user_id', user.id)
 				.preload('posts', (query) => {
-					query.preload('product'); // Precarrega os produtos relacionados
+					query.preload('product'); 
 				})
-				.firstOrFail(); // Lança exceção se não encontrar
+				.firstOrFail(); 
+
+        console.log(cart)
+
+			return response.ok(cart);
 	
-			// Renderiza a página do carrinho (ou retorna os dados em JSON)
-			return view.render('cart/index', { cart });
-		} catch (error) {
-			// Retorna um erro caso o carrinho não seja encontrado
-			return response.notFound('Carrinho não encontrado');
-		}
 	}
 	
+  public async getByUser({ auth, response }: HttpContext) {
+    try {
+      console.log('Kevyn1')
+      const user = await auth.use('web').authenticate();
+      console.log(user)
+ 
+      const cart = await Cart.query()
+        .where('user_id', user.id)
+        .preload('posts', (query) => {
+          query.preload('product'); 
+        })
+        .first();
+  
+      if (!cart) {
+        return response.notFound('Carrinho não encontrado para o usuário logado.');
+      }
+ 
+      return response.ok(cart);
+    } catch (error) {
+      if (error.message === 'E_UNAUTHORIZED_ACCESS') {
+        return response.unauthorized('Você precisa estar logado para acessar esta rota.');
+      }
+
+      console.log('Kevyn2')
+      return response.internalServerError({
+        message: 'Ocorreu um erro ao buscar o carrinho.',
+        error: error.message,
+      });
+    }
+  }  
 
   // Adicionar item ao carrinho
   public async store({ auth, request, response }: HttpContext) {

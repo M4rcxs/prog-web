@@ -5,7 +5,7 @@
         <h1 class="text-center text-3xl font-semibold text-black mb-8">
             Criar Usuário
         </h1>
-        <form action="/auth/register" method="POST">
+        <form id="registerForm" action="/auth/register" method="POST">
             <!-- Nome Completo -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="full_name">
@@ -17,6 +17,7 @@
                     placeholder="Seu nome completo" 
                     name="full_name" 
                     required>
+                <p id="full_name_error" class="text-red-500 text-sm hidden">Este campo é obrigatório.</p>
             </div>
             <!-- E-mail -->
             <div class="mb-4">
@@ -29,55 +30,45 @@
                     placeholder="contato@progweb.com" 
                     name="email" 
                     required>
+                <p id="email_error" class="text-red-500 text-sm hidden">Por favor, insira um e-mail válido.</p>
             </div>
             <div class="mb-6">
-							<label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-									Sua senha
-							</label>
-							<div class="relative">
-									<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-											id="password" 
-											type="password" 
-											placeholder="********" 
-											name="password" 
-											required>
-									<!-- Botão para alternar a visualização da senha -->
-									<button type="button" onclick="togglePassword('password', this)" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
-											👁️
-									</button>
-							</div>
-					</div>
-					
-					<!-- Campo de Confirmação da Senha -->
-					<div class="mb-6">
-							<label class="block text-gray-700 text-sm font-bold mb-2" for="confirm_password">
-									Confirme sua senha
-							</label>
-							<div class="relative">
-									<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-											id="confirm_password" 
-											type="password" 
-											placeholder="********" 
-											name="confirm_password" 
-											required>
-									<!-- Botão para alternar a visualização da confirmação de senha -->
-									<button type="button" onclick="togglePassword('confirm_password', this)" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
-											👁️
-									</button>
-							</div>
-					</div>
-					
-					<script>
-					function togglePassword(id, el) {
-							const passwordField = document.getElementById(id);
-							const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-							passwordField.setAttribute('type', type);
-					
-							// Altera o ícone para refletir se a senha está visível ou não
-							el.textContent = type === 'password' ? '👁️' : '🙈';
-					}
-					</script>
-					
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Sua senha
+                </label>
+                <div class="relative">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        id="password" 
+                        type="password" 
+                        placeholder="********" 
+                        name="password" 
+                        required>
+                    <!-- Botão para alternar a visualização da senha -->
+                    <button type="button" onclick="togglePassword('password', this)" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
+                        👁️
+                    </button>
+                </div>
+                <p id="password_error" class="text-red-500 text-sm hidden">A senha deve ter pelo menos 4 caracteres.</p>
+            </div>
+            <!-- Campo de Confirmação da Senha -->
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm_password">
+                    Confirme sua senha
+                </label>
+                <div class="relative">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        id="confirm_password" 
+                        type="password" 
+                        placeholder="********" 
+                        name="confirm_password" 
+                        required>
+                    <!-- Botão para alternar a visualização da confirmação de senha -->
+                    <button type="button" onclick="togglePassword('confirm_password', this)" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
+                        👁️
+                    </button>
+                </div>
+                <p id="confirm_password_error" class="text-red-500 text-sm hidden">As senhas não coincidem.</p>
+            </div>
             <!-- Telefone -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
@@ -86,9 +77,10 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="phone" 
                     type="text" 
-                    placeholder="(XX) XXXXX-XXXX" 
+                    placeholder="(21) 99999-9999" 
                     name="phone" 
                     required>
+                <p id="phone_error" class="text-red-500 text-sm hidden">Apenas números e deve conter 11 dígitos, incluindo o DDD.</p>
             </div>
             <!-- Botão Criar Conta -->
             <div class="flex items-center justify-between">
@@ -104,3 +96,51 @@
         </div>
     </div>
 </div>
+
+<script>
+    function togglePassword(id, el) {
+        const passwordField = document.getElementById(id);
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+
+        // Altera o ícone para refletir se a senha está visível ou não
+        el.textContent = type === 'password' ? '👁️' : '🙈';
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        let isValid = true;
+
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        const phone = document.getElementById('phone').value;
+
+        // Valida se as senhas coincidem
+        if (password !== confirmPassword) {
+            document.getElementById('confirm_password_error').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('confirm_password_error').classList.add('hidden');
+        }
+
+        // Valida se a senha tem pelo menos 4 caracteres
+        if (password.length < 4) {
+            document.getElementById('password_error').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('password_error').classList.add('hidden');
+        }
+
+        // Valida o formato do telefone (apenas números, totalizando 11 dígitos)
+        const phoneRegex = /^\d{11}$/;
+        if (!phoneRegex.test(phone)) {
+            document.getElementById('phone_error').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('phone_error').classList.add('hidden');
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
