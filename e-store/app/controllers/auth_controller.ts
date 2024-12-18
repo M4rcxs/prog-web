@@ -5,11 +5,33 @@ import { middleware } from '#start/kernel'
 import session from '#config/session'
 
 export default class AuthController {
-  public async register({ request, response }: HttpContext) {
-    const data = request.only(['full_name', 'email', 'password', 'phone'])
-    await User.create(data)
+  public async register({ params, request, response }: HttpContext) {
+    const id = params.id // Obtém o ID da rota, se fornecido
 
-    return response.redirect().toRoute('auth.login')
+    if (id) {
+      // Editando um usuário existente
+      try {
+        const user = await User.findOrFail(id) // Busca o usuário ou lança um erro 404
+        const data = request.only(['full_name', 'email', 'phone']) // Dados que podem ser atualizados
+
+        user.merge(data) // Atualiza apenas os campos fornecidos
+        await user.save() // Salva as alterações no banco de dados
+        return response.redirect().toRoute('auth.profile', { id: user.id }) // Redireciona após a edição
+      } catch (error) {
+        console.error('Erro ao buscar usuário:', error.message)
+        return response.status(404).send('Usuário não encontrado.')
+      }
+    } else {
+      // Criando um novo usuário
+      try {
+        const newUserData = request.only(['full_name', 'email', 'password', 'phone']) // Inclui os dados necessários
+        const user = await User.create(newUserData) // Cria o novo usuário
+        return response.redirect().toRoute('auth.login') // Redireciona para a rota de login
+      } catch (error) {
+        console.error('Erro ao criar usuário:', error.message)
+        return response.status(400).send('Erro ao criar usuário.')
+      }
+    }
   }
 
   async store({ auth, request, response }: HttpContext) {
@@ -26,7 +48,6 @@ export default class AuthController {
     await auth.use('web').login(user)
 
     return response.redirect().toRoute('/home')
-
   }
 
   public async loginView({ view }: HttpContext) {
