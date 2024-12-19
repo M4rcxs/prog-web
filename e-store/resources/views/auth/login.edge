@@ -2,51 +2,114 @@
 
 <div class="flex justify-center h-screen items-center bg-gray-100">
     <div class="w-full max-w-lg bg-white shadow-md rounded px-12 py-10 mb-6">
-        <h1 class="text-center text-3xl font-semibold text-black-600 mb-8">
-            Login
+        <h1 class="text-center text-3xl font-semibold text-black mb-8">
+            {{ i18n.t('auth.login.title', 'Login') }}
         </h1>
         @if (flashMessages.get('error'))
             <div class="mb-4 text-red-500 text-sm font-bold text-center">
                 {{ flashMessages.get('error') }}
             </div>
         @endif
-        <form action="/auth/store" method="POST">
+        <form id="loginForm" action="/auth/store" method="POST">
+            <!-- E-mail -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                    Seu e-mail
+                    {{ i18n.t('auth.login.email', 'Seu e-mail') }}
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                <input 
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                     id="email" 
                     type="email" 
-                    placeholder="contato@progweb.com" 
+                    placeholder="{{ i18n.t('auth.login.email_placeholder', 'contato@progweb.com') }}" 
                     name="email" 
                     required>
+                <p id="email_error" class="text-red-500 text-sm hidden">Por favor, insira um e-mail válido.</p>
             </div>
+            <!-- Senha -->
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                    Sua senha
+                    {{ i18n.t('auth.login.password', 'Sua senha') }}
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                    id="password" 
-                    type="password" 
-                    placeholder="********" 
-                    name="password" 
-                    required>
+                <div class="relative">
+                    <input 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        id="password" 
+                        type="password" 
+                        placeholder="********" 
+                        name="password" 
+                        required>
+                    <button 
+                        type="button" 
+                        onclick="togglePassword('password', this)" 
+                        class="absolute inset-y-0 right-0 px-4 py-2 text-gray-600">
+                        👁️
+                    </button>
+                </div>
+                <p id="password_error" class="text-red-500 text-sm hidden">A senha é obrigatória.</p>
             </div>
+            <!-- Manter-me logado -->
             <div class="mb-6 flex items-center">
-                <input class="mr-2 leading-tight" type="checkbox" id="remember" name="remember">
-                <label class="text-sm text-gray-700" for="remember">Manter-me logado</label>
+                <input 
+                    class="mr-2 leading-tight" 
+                    type="checkbox" 
+                    id="remember" 
+                    name="remember">
+                <label class="text-sm text-gray-700" for="remember">
+                    {{ i18n.t('auth.login.remember_me', 'Manter-me logado') }}
+                </label>
             </div>
+            <!-- Botão Login -->
             <div class="flex items-center justify-between">
-                <button class="bg-black hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                <button 
+                    class="bg-black hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
                     type="submit">
-                    Logar
+                    {{ i18n.t('auth.login.login_button', 'Logar') }}
                 </button>
-            </div>            
+            </div>
         </form>
         <div class="text-center mt-4">
-            <span class="text-sm text-gray-600">Ainda não tem conta?</span>
-            <a href="/auth/create" class="text-sm text-black-600 hover:underline">Cadastre-se</a>
+            <span class="text-sm text-gray-600">
+                {{ i18n.t('auth.login.no_account', 'Ainda não tem conta?') }}
+            </span>
+            <a href="/auth/create" class="text-sm text-black hover:underline">
+                {{ i18n.t('auth.login.signup_here', 'Cadastre-se') }}
+            </a>
         </div>
     </div>
 </div>
+
+<script>
+    function togglePassword(id, el) {
+        const passwordField = document.getElementById(id);
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        el.textContent = type === 'password' ? '👁️' : '🙈';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        let isValid = true;
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Valida se o e-mail está preenchido
+        if (!email || !email.includes('@')) {
+            document.getElementById('email_error').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('email_error').classList.add('hidden');
+        }
+
+        // Valida se a senha está preenchida
+        if (!password) {
+            document.getElementById('password_error').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('password_error').classList.add('hidden');
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>

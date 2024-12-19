@@ -1,0 +1,14 @@
+{
+    "addresses_list": {
+      "title": "Meus Endereços",
+      "full_name": "Nome Completo",
+      "street": "Rua",
+      "number": "Número",
+      "neighborhood": "Bairro",
+      "state_city": "Estado/Cidade",
+      "cep": "CEP",
+      "phone": "Telefone",
+      "add_new_address": "Adicionar Novo Endereço"
+    }
+  }
+  
