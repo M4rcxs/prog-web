@@ -21,7 +21,7 @@ export default class CategoriesController {
     try {
       const category = await Category.create(data)
 
-      return response.status(201).json(category)
+      return response.redirect().toRoute('products.create')
     } catch (error) {
       return response.status(500).json({
         message: 'Erro ao criar categoria',
