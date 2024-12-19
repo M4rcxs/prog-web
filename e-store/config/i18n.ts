@@ -2,7 +2,7 @@ import app from '@adonisjs/core/services/app'
 import { defineConfig, formatters, loaders } from '@adonisjs/i18n'
 
 const i18nConfig = defineConfig({
-  defaultLocale: 'en',
+  defaultLocale: 'pt',
   formatter: formatters.icu(),
 
   loaders: [
@@ -16,9 +16,10 @@ const i18nConfig = defineConfig({
      *   - "resources/lang/it"
      */
     loaders.fs({
-      location: app.languageFilesPath()
+      location: app.languageFilesPath(),
     }),
   ],
 })
+console.log(app.languageFilesPath())
 
 export default i18nConfig
