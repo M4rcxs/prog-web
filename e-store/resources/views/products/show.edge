@@ -17,10 +17,6 @@
 
         <!-- Right - Product Info -->
         <div class="w-[550px]">
-            <!-- Breadcrumb -->
-            <nav class="text-sm text-neutral-400 mb-4">
-                Início / Acessórios / Boné
-            </nav>
 
             <!-- Title -->
             <h1 class="text-2xl font-title font-bold text-black mb-2">
@@ -42,13 +38,7 @@
             <div class="text-3xl font-bold text-black mb-1">R$ {{product.price}}</div>
 
             <!-- Quantity and Button -->
-            <div class="flex items-center gap-4 mt-6">
-                <input type="number" value="1" min="1"
-                    class="w-[60px] h-[40px] p-2 border border-neutral-300 rounded-md text-black" />
-                <button class="h-[40px] w-[200px] bg-black text-white font-bold rounded-md hover:bg-neutral-800">
-                    COMPRAR
-                </button>
-            </div>
+            
 
             <div class="text-sm mt-2">
                 Estoque:
@@ -58,12 +48,25 @@
                     <span class="text-red-600">Indisponível</span>
                 @endif
             </div>
+            <div class="flex items-center gap-4 mt-6">
+                @if (product.quantidade > 0)
+                <button class="h-[40px] w-[200px] bg-black text-white font-bold rounded-md hover:bg-neutral-800">
+                    COMPRAR
+                </button>
+                @else
+                <button class="h-[40px] w-[200px] bg-neutral-700 text-white font-bold rounded-md" disabled>
+                    Indisponível
+                </button>
+                @endif
+                
+            </div>
             
 
             <hr class="my-4 border-neutral-300" />
 
             <!-- Payment Methods -->
             <div class="text-neutral-700 text-sm mb-4">
+                @if (product.quantidade > 0)
                 <div class="flex justify-between items-center mt-2">
                     <span>
                         <i class="fa-solid fa-truck"></i> Pagar na Entrega
@@ -82,12 +85,34 @@
                     </span>
                     <span>R$ {{product.price-(product.price*0.1)}}</span> <!-- 10% de desconto -->
                 </div>
+                @else
+                <div class="flex justify-between items-center mt-2">
+                    <span>
+                        <i class="fa-solid fa-truck"></i> Pagar na Entrega
+                    </span>
+                    <span class="text-black">-</span>
+                </div>
+                <div class="flex justify-between items-center mt-2">
+                    <span>
+                        <i class="fa-brands fa-paypal"></i> PagSeguro
+                    </span>
+                    <span class="text-black">-</span>
+                </div>
+                <div class="flex justify-between items-center mt-2">
+                    <span>
+                        <i class="fa-solid fa-money-bill"></i> Boleto Bancário
+                    </span>
+                    <span class="text-black">-</span>
+                </div>
+                @endif
+                
             </div>
 
             <hr class="my-4 border-neutral-300" />
 
             <!-- Shipping Calculator -->
             <div>
+                @if (product.quantidade > 0)
                 <label class="block text-neutral-700 text-sm mb-2">
                     CALCULE O FRETE
                 </label>
@@ -101,6 +126,10 @@
                 <div id="endereco" class="mt-4 text-neutral-700 text-sm">
                     <!-- Aqui será exibido o endereço -->
                 </div>
+                @else
+                    
+                @endif
+                
             </div>
         </div>
     </div>
