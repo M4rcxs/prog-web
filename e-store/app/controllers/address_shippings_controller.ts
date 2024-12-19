@@ -6,8 +6,6 @@ export default class AddressShippingsController {
   public async index({ auth, view }: HttpContext) {
     const user = await auth.use('web').authenticate();
     const addresses = await AddressShipping.query().where('user_id', user.id)
-		console.log(addresses)
-		console.log(user)
 
     // Verifica se há endereços cadastrados
 		if (addresses.length > 0) {
@@ -38,7 +36,7 @@ export default class AddressShippingsController {
   }
 
   // Salva um novo endereço no banco de dados
-  public async store({ request, response, auth, view }: HttpContext) {
+  public async store({ request, response, auth }: HttpContext) {
 		const user = await auth.use('web').authenticate();
 
     const data = request.only([

@@ -12,14 +12,14 @@
       <h1 class="text-2xl font-bold mb-6">Meus Endereços</h1>
 
       <ul>
-        @foreach (addresses as address)
+        @each (address in addresses)
           <li class="border-b border-gray-200 py-4">
             <p><strong>{{ address.full_name }}</strong></p>
             <p>{{ address.street }}, {{ address.number }} - {{ address.neighborhood }}</p>
             <p>{{ address.cep }} - {{ address.state_city }}</p>
             <p><small>Telefone: {{ address.phone }}</small></p>
           </li>
-        @endforeach
+        @endeach
       </ul>
 
       <div class="mt-6 text-right">
