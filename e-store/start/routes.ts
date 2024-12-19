@@ -9,16 +9,12 @@ import { middleware } from './kernel.js'
 import CartsController from '#controllers/carts_controller'
 import AddressShippingsController from '#controllers/address_shippings_controller'
 
-// router
-//  .get('dashboard', () => {})
-//  .use(middleware.auth())
-
 router
   .group(() => {
     router.get('/', [ProductsController, 'index']).as('index')
     router.post('/store', [ProductsController, 'store']).as('store')
     router.get('/create', [ProductsController, 'create']).as('create').use(middleware.auth())
-    router.get('/:id', [ProductsController, 'show']).as('show').use(middleware.auth())
+    router.get('/:id', [ProductsController, 'show']).as('show')
     router.delete('/:id', [ProductsController, 'destroy']).as('destroy')
     router.patch('/:id', [ProductsController, 'patch']).as('patch')
   })

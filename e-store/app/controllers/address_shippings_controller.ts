@@ -32,7 +32,7 @@ export default class AddressShippingsController {
   }
 
   public async create({ view }: HttpContext) {
-    return view.render('address_shipping/create')
+    return view.render('addresses_shipping/create_address')
   }
 
   // Salva um novo endereço no banco de dados
