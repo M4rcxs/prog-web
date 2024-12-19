@@ -51,7 +51,7 @@
             </div>
             <div class="flex items-center gap-4 mt-6">
                 @if (product.quantidade > 0)
-                <button class="h-[40px] w-[200px] bg-black text-white font-bold rounded-md hover:bg-neutral-800">
+                <button class="add-to-cart h-[40px] w-[200px] bg-black text-white font-bold rounded-md hover:bg-neutral-800" data-id="{{ product.id }}">
                     COMPRAR
                 </button>
                 @else
