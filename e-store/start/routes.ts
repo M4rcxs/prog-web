@@ -7,10 +7,7 @@ import CategoriesController from '#controllers/categories_controller'
 import AuthController from '#controllers/auth_controller'
 import { middleware } from './kernel.js'
 import CartsController from '#controllers/carts_controller'
-
-// router
-//  .get('dashboard', () => {})
-//  .use(middleware.auth())
+import AddressShippingsController from '#controllers/address_shippings_controller'
 
 router
   .group(() => {
@@ -70,3 +67,15 @@ router
   })
   .prefix('cart')
   .as('cart')
+
+  router
+  .group(() => {
+    router.get('/', [AddressShippingsController, 'index']).as('index').use(middleware.auth())
+    router.get('/create', [AddressShippingsController, 'create']).as('create').use(middleware.auth())
+    router.get('/:id', [AddressShippingsController, 'show']).as('show').use(middleware.auth())
+    router.post('/store', [AddressShippingsController, 'store']).as('store').use(middleware.auth())
+    router.patch('/:id', [AddressShippingsController, 'update']).as('update').use(middleware.auth())
+    router.delete('/:id', [AddressShippingsController, 'destroy']).as('destroy').use(middleware.auth())
+  })
+  .prefix('address_shipping')
+  .as('address_shipping')

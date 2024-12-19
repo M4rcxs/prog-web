@@ -28,7 +28,6 @@ export default class CartsController {
 	
   public async getByUser({ auth, response }: HttpContext) {
     try {
-      console.log('Kevyn1')
       const user = await auth.use('web').authenticate();
       console.log(user)
  
@@ -49,7 +48,6 @@ export default class CartsController {
         return response.unauthorized('Você precisa estar logado para acessar esta rota.');
       }
 
-      console.log('Kevyn2')
       return response.internalServerError({
         message: 'Ocorreu um erro ao buscar o carrinho.',
         error: error.message,

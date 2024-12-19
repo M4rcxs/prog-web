@@ -1,0 +1,33 @@
+@include('layouts/main') 
+
+<div class="container mx-auto mt-10 px-4">
+  <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6">
+    <!-- Menu Profile -->
+    <div class="w-full lg:max-w-sm bg-white p-4 rounded shadow-md">
+      @include('components/menuProfile')
+    </div>
+
+    <!-- Lista de Endereços -->
+    <div class="w-full lg:w-2/3 bg-white p-6 rounded shadow-md">
+      <h1 class="text-2xl font-bold mb-6">Meus Endereços</h1>
+
+      <ul>
+        @each (address in addresses)
+          <li class="border-b border-gray-200 py-4">
+            <p><strong>{{ address.full_name }}</strong></p>
+            <p>{{ address.street }}, {{ address.number }} - {{ address.neighborhood }}</p>
+            <p>{{ address.cep }} - {{ address.state_city }}</p>
+            <p><small>Telefone: {{ address.phone }}</small></p>
+          </li>
+        @endeach
+      </ul>
+
+      <div class="mt-6 text-right">
+        <a href="{{ route('address_shipping.create') }}" 
+           class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
+          Adicionar Novo Endereço
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

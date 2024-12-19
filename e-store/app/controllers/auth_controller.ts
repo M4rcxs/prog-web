@@ -99,6 +99,6 @@ export default class AuthController {
   public async logout({ auth, response }: HttpContext) {
     await auth.use('web').logout()
 
-    return response.redirect().toRoute('/home')
+    return response.redirect().toRoute('/')
   }
 }

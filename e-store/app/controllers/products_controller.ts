@@ -14,7 +14,7 @@ export default class ProductsController {
     try {
         const product = await Product.query()
             .where('id', params.id)
-            .preload('category') // Carrega a categoria associada
+            .preload('category')
             .first()
 
         if (!product) {
