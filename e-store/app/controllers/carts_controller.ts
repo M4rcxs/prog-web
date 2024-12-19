@@ -20,8 +20,6 @@ export default class CartsController {
 				})
 				.firstOrFail(); 
 
-        console.log(cart)
-
 			return response.ok(cart);
 	
 	}
@@ -29,7 +27,6 @@ export default class CartsController {
   public async getByUser({ auth, response }: HttpContext) {
     try {
       const user = await auth.use('web').authenticate();
-      console.log(user)
  
       const cart = await Cart.query()
         .where('user_id', user.id)
@@ -77,7 +74,7 @@ export default class CartsController {
 
       if (item) {
         // Atualizar quantidade se o item já existir
-        //item.quantity += quantity
+        item.quantity += quantity
         await item.save()
       } else {
         // Adicionar novo item
