@@ -14,7 +14,7 @@ router
     router.get('/', [ProductsController, 'index']).as('index')
     router.post('/store', [ProductsController, 'store']).as('store')
     router.get('/create', [ProductsController, 'create']).as('create').use(middleware.auth())
-    router.get('/:id', [ProductsController, 'show']).as('show')
+    router.get('/:id', [ProductsController, 'show']).as('show').use(middleware.auth())
     router.delete('/:id', [ProductsController, 'destroy']).as('destroy')
     router.patch('/:id', [ProductsController, 'patch']).as('patch')
   })
