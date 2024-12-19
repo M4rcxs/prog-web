@@ -1,0 +1,14 @@
+{
+    "addresses_list": {
+      "title": "My Addresses",
+      "full_name": "Full Name",
+      "street": "Street",
+      "number": "Number",
+      "neighborhood": "Neighborhood",
+      "state_city": "State/City",
+      "cep": "ZIP Code",
+      "phone": "Phone",
+      "add_new_address": "Add New Address"
+    }
+  }
+  
